@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State of Platform — Corelight</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --surface3: #21262d;
+    --green: #3FB950;
+    --green-dim: rgba(63,185,80,0.1);
+    --green-glow: rgba(63,185,80,0.15);
+    --blue: #58a6ff;
+    --blue-dim: rgba(88,166,255,0.1);
+    --orange: #f78166;
+    --orange-dim: rgba(247,129,102,0.1);
+    --yellow: #e3b341;
+    --yellow-dim: rgba(227,179,65,0.1);
+    --text: #e6edf3;
+    --text-mid: #c9d1d9;
+    --text-muted: #8b949e;
+    --border: rgba(255,255,255,0.06);
+    --border-green: rgba(63,185,80,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 16px; }
+
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+    50% { opacity: 0.5; box-shadow: 0 0 3px var(--green); }
+  }
+
+  .header-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .header-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  .header-meta {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+
+  .header-meta span {
+    color: var(--green);
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--green);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .filter-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 4px;
+  }
+
+  .filter-count {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .filter-count span { color: var(--green); }
+
+  /* ── MAIN CONTENT ── */
+  .main { padding: 32px 40px 60px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── KPI GRID ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .kpi-card:hover { border-color: rgba(255,255,255,0.12); }
+
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .kpi-green::before { background: var(--green); }
+  .kpi-blue::before { background: var(--blue); }
+  .kpi-orange::before { background: var(--orange); }
+  .kpi-yellow::before { background: var(--yellow); }
+
+  .kpi-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .kpi-value {
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-green .kpi-value { color: var(--green); }
+  .kpi-blue .kpi-value { color: var(--blue); }
+  .kpi-orange .kpi-value { color: var(--orange); }
+  .kpi-yellow .kpi-value { color: var(--yellow); }
+
+  .kpi-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── TWO COL LAYOUT ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  /* ── CHART CARD ── */
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .chart-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .chart-sub {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  /* ── BAR CHART ── */
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 90px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 22px;
+    background: var(--surface3);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+  }
+
+  .bar-value {
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 30px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  /* ── DONUT ── */
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .donut-svg { flex-shrink: 0; }
+
+  .donut-legend { display: flex; flex-direction: column; gap: 8px; }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-val { color: var(--text-mid); margin-left: auto; padding-left: 12px; }
+
+  /* ── POV FUNNEL ── */
+  .funnel { display: flex; flex-direction: column; gap: 6px; }
+
+  .funnel-stage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--surface3);
+    border-radius: 5px;
+    border-left: 3px solid transparent;
+    transition: background 0.15s;
+  }
+
+  .funnel-stage:hover { background: var(--surface2); }
+
+  .funnel-name {
+    font-size: 10px;
+    color: var(--text-mid);
+    width: 110px;
+    flex-shrink: 0;
+  }
+
+  .funnel-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .funnel-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .funnel-num {
+    font-size: 11px;
+    font-weight: 500;
+    width: 30px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── ENGAGEMENT SPLIT ── */
+  .engage-split {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .engage-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .engage-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 120px;
+    flex-shrink: 0;
+  }
+
+  .engage-track {
+    flex: 1;
+    height: 28px;
+    background: var(--surface3);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .engage-fill-active {
+    background: var(--green);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #0d1117;
+    font-weight: 500;
+    transition: width 0.6s ease;
+  }
+
+  .engage-fill-dark {
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--text-muted);
+    transition: width 0.6s ease;
+  }
+
+  /* ── TENURE CHART ── */
+  .tenure-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .tenure-card {
+    background: var(--surface3);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: border-color 0.15s;
+  }
+
+  .tenure-card:hover { border-color: var(--green); }
+
+  .tenure-val {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+
+  .tenure-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ASSUMPTIONS ── */
+  .assumptions-section {
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .assumptions-toggle {
+    background: var(--surface);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .assumptions-toggle:hover { background: var(--surface2); }
+
+  .assumptions-toggle-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .assumptions-toggle-label::before {
+    content: '⚑';
+    font-size: 11px;
+    color: var(--yellow);
+  }
+
+  .toggle-arrow {
+    font-size: 10px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+
+  .toggle-arrow.open { transform: rotate(180deg); }
+
+  .assumptions-body {
+    display: none;
+    background: var(--surface2);
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .assumptions-body.open { display: block; }
+
+  .assumption-row {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+  }
+
+  .assumption-row:last-child { border-bottom: none; }
+
+  .assumption-raw {
+    color: var(--yellow);
+    width: 160px;
+    flex-shrink: 0;
+    font-style: italic;
+  }
+
+  .assumption-treat {
+    color: var(--text-muted);
+    flex: 1;
+  }
+
+  .assumption-flag {
+    color: var(--orange);
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .dash-footer {
+    margin-top: 8px;
+    padding: 12px 0;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    font-style: italic;
+    text-align: center;
+    opacity: 0.6;
+  }
+
+  /* ── HIGHLIGHT STATE ── */
+  .kpi-card.dimmed, .chart-card.dimmed, .funnel-stage.dimmed {
+    opacity: 0.3;
+    transition: opacity 0.2s;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-dot"></div>
+    <div>
+      <div class="header-title">State of Platform</div>
+      <div class="header-sub">Corelight · Synthetic data · Analysis by Marissa LaMar</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    Data window: 2021 – May 2026<br>
+    Engagement snapshot: <span>Apr 13 – May 12, 2026</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">View</span>
+  <button class="filter-btn active" onclick="setView('all')">All Accounts</button>
+  <button class="filter-btn" onclick="setView('won')">Won / Active</button>
+  <button class="filter-btn" onclick="setView('pov')">POV Pipeline</button>
+  <button class="filter-btn" onclick="setView('lost')">Lost</button>
+
+  <div class="filter-divider"></div>
+
+  <span class="filter-label">Revenue</span>
+  <button class="filter-btn" onclick="setRevenue('all')">All</button>
+  <button class="filter-btn" onclick="setRevenue('500k')">500K+</button>
+  <button class="filter-btn" onclick="setRevenue('100-500k')">100–500K</button>
+  <button class="filter-btn" onclick="setRevenue('50-100k')">50–100K</button>
+  <button class="filter-btn" onclick="setRevenue('<50k')">&lt;50K</button>
+
+  <div class="filter-count" id="filter-count">Showing <span>95</span> customers</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- KPI ROW -->
+  <div class="section-label">Overview</div>
+  <div class="kpi-grid" id="kpi-grid">
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Total Customers Won</div>
+      <div class="kpi-value" id="kpi-total">95</div>
+      <div class="kpi-sub">all time</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Active Customers</div>
+      <div class="kpi-value" id="kpi-active">82</div>
+      <div class="kpi-sub">at least 1 active tenant</div>
+    </div>
+    <div class="kpi-card kpi-orange">
+      <div class="kpi-label">Churned</div>
+      <div class="kpi-value" id="kpi-churned">13</div>
+      <div class="kpi-sub">13.7% customer churn rate</div>
+    </div>
+    <div class="kpi-card kpi-yellow">
+      <div class="kpi-label">POV Win Rate</div>
+      <div class="kpi-value" id="kpi-winrate">6.6%</div>
+      <div class="kpi-sub">5 won · 71 lost of decided</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">Active Tenants</div>
+      <div class="kpi-value" id="kpi-tenants">143</div>
+      <div class="kpi-sub">avg 1.7 per customer</div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Revenue + POV Funnel -->
+  <div class="two-col">
+
+    <!-- Revenue Distribution -->
+    <div class="chart-card">
+      <div class="chart-title">Revenue Distribution</div>
+      <div class="chart-sub">Active customers by ARR bucket</div>
+      <div class="bar-chart" id="rev-chart">
+        <div class="bar-row">
+          <div class="bar-label">&lt;50K</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:48%; background: var(--green); opacity:0.5;"></div>
+          </div>
+          <div class="bar-value">39</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">50–100K</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:17%; background: var(--green); opacity:0.65;"></div>
+          </div>
+          <div class="bar-value">14</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">100–500K</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:22%; background: var(--green); opacity:0.8;"></div>
+          </div>
+          <div class="bar-value">18</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">500K+</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:9%; background: var(--green);"></div>
+          </div>
+          <div class="bar-value">7</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Unknown</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:5%; background: var(--text-muted); opacity:0.4;"></div>
+          </div>
+          <div class="bar-value">4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POV Funnel -->
+    <div class="chart-card">
+      <div class="chart-title">POV Pipeline</div>
+      <div class="chart-sub">Proof of value conversion funnel · all time</div>
+      <div class="funnel">
+        <div class="funnel-stage" style="border-left-color: var(--blue);">
+          <div class="funnel-name" style="color:var(--blue);">Total POVs</div>
+          <div class="funnel-bar-track">
+            <div class="funnel-bar-fill" style="width:100%; background:var(--blue); opacity:0.4;"></div>
+          </div>
+          <div class="funnel-num" style="color:var(--blue);">158</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color: var(--green);">
+          <div class="funnel-name" style="color:var(--green);">POV Won</div>
+          <div class="funnel-bar-track">
+            <div class="funnel-bar-fill" style="width:3.2%; background:var(--green);"></div>
+          </div>
+          <div class="funnel-num" style="color:var(--green);">5</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color: var(--orange);">
+          <div class="funnel-name" style="color:var(--orange);">POV Lost</div>
+          <div class="funnel-bar-track">
+            <div class="funnel-bar-fill" style="width:44.9%; background:var(--orange); opacity:0.7;"></div>
+          </div>
+          <div class="funnel-num" style="color:var(--orange);">71</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color: var(--yellow);">
+          <div class="funnel-name" style="color:var(--yellow);">Active / No Dec</div>
+          <div class="funnel-bar-track">
+            <div class="funnel-bar-fill" style="width:51.9%; background:var(--yellow); opacity:0.5;"></div>
+          </div>
+          <div class="funnel-num" style="color:var(--yellow);">82</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color: var(--text-muted);">
+          <div class="funnel-name" style="color:var(--text-muted);">Win Rate (decided)</div>
+          <div class="funnel-bar-track">
+            <div class="funnel-bar-fill" style="width:6.6%; background:var(--green); opacity:0.9;"></div>
+          </div>
+          <div class="funnel-num" style="color:var(--green);">6.6%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Engagement + Multi-tenant + Gbps -->
+  <div class="three-col">
+
+    <!-- 30-Day Engagement -->
+    <div class="chart-card">
+      <div class="chart-title">30-Day Engagement</div>
+      <div class="chart-sub">Active customers · Apr 13 – May 12</div>
+      <div style="margin-top: 16px;">
+        <div class="engage-split">
+          <div style="margin-bottom:8px;">
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:10px; letter-spacing:0.06em;">Pendo activity in last 30 days</div>
+            <div style="display:flex; height:48px; border-radius:5px; overflow:hidden; margin-bottom:10px;">
+              <div style="width:54%; background:var(--green); opacity:0.6; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:#0d1117;">54%</div>
+              <div style="width:46%; background:var(--surface3); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--text-muted);">46%</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px;">
+              <span style="color:var(--green);">Active · 44 customers</span>
+              <span style="color:var(--text-muted);">Dark · 38 customers</span>
+            </div>
+          </div>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:10px;">CHURN STATUS</div>
+            <div style="display:flex; gap:16px;">
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--green); font-weight:500;">82</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">active</div>
+              </div>
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--yellow); font-weight:500;">2</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">at risk</div>
+              </div>
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--orange); font-weight:500;">13</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">churned</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-tenant / Land & Expand -->
+    <div class="chart-card">
+      <div class="chart-title">Land &amp; Expand</div>
+      <div class="chart-sub">Multi-tenant customers · active</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:7px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">TOP MULTI-TENANT ACCOUNTS</div>
+        <!-- bars for top multi-tenant customers -->
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 39</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:100%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:20px;">20</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 25</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:20px;">10</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 49</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:20px;">10</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 34</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:35%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:20px;">7</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 29</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:25%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:20px;">5</div>
+        </div>
+        <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">13</div>
+            <div style="font-size:9px; color:var(--text-muted);">multi-tenant</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">69</div>
+            <div style="font-size:9px; color:var(--text-muted);">single tenant</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">1.7x</div>
+            <div style="font-size:9px; color:var(--text-muted);">avg tenants</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gbps Distribution -->
+    <div class="chart-card">
+      <div class="chart-title">Network Scale (Gbps)</div>
+      <div class="chart-sub">Active customers · where data available</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">DEPLOYMENT SIZE</div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">1 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:56%; background:var(--blue); opacity:0.5;"></div>
+          </div>
+          <div class="bar-value">71</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">2–5 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:22%; background:var(--blue); opacity:0.65;"></div>
+          </div>
+          <div class="bar-value">28</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">6–15 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:13%; background:var(--blue); opacity:0.8;"></div>
+          </div>
+          <div class="bar-value">17</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">16–50 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:7%; background:var(--blue); opacity:0.9;"></div>
+          </div>
+          <div class="bar-value">9</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">50+ Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:2%; background:var(--blue);"></div>
+          </div>
+          <div class="bar-value">2</div>
+        </div>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:9px; color:var(--text-muted); line-height:1.6;">
+          Median deployment: <span style="color:var(--blue);">1 Gbps</span><br>
+          Largest deployment: <span style="color:var(--blue);">150 Gbps</span><br>
+          56% of customers at minimum tier
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ASSUMPTIONS -->
+  <div class="assumptions-section">
+    <div class="assumptions-toggle" onclick="toggleAssumptions()">
+      <div class="assumptions-toggle-label">Data Assumptions &amp; Taxonomy Notes</div>
+      <div class="toggle-arrow" id="toggle-arrow">▼</div>
+    </div>
+    <div class="assumptions-body" id="assumptions-body">
+      <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:12px;">These groupings drive the numbers above. Flag any that need correction.</div>
+      <div class="assumption-row" style="font-size:9px; color:var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
+        <div style="width:160px;">Raw Value (Col D/E)</div>
+        <div style="flex:1;">Treatment</div>
+        <div style="width:100px; text-align:right;">Flagged?</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">POV = POC</div>
+        <div class="assumption-treat">Treated as the same stage. Both = proof of value evaluation.</div>
+        <div class="assumption-flag">Confirm</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">POV (unlabeled)</div>
+        <div class="assumption-treat">In-progress, outcome unknown. Excluded from win/loss rate calculation.</div>
+        <div class="assumption-flag">Confirm</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">POV - No Dec</div>
+        <div class="assumption-treat">Treated as lost. No decision = no conversion.</div>
+        <div class="assumption-flag">Confirm</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Going to Delete</div>
+        <div class="assumption-treat">Treated as lost/inactive. POV went stale.</div>
+        <div class="assumption-flag">OK</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Deletion Blocked (500K+)</div>
+        <div class="assumption-treat">Status unclear. Excluded from metrics. Likely active recovery conversation.</div>
+        <div class="assumption-flag" style="color:var(--orange);">Needs input</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">PRIME / ORG rows</div>
+        <div class="assumption-treat">Excluded from all customer metrics. Non-standard account designation.</div>
+        <div class="assumption-flag" style="color:var(--orange);">Needs input</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Won/Will churn</div>
+        <div class="assumption-treat">Counted as active, flagged separately as at-risk (2 customers).</div>
+        <div class="assumption-flag">OK</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Won rows, Deleted tenants</div>
+        <div class="assumption-treat">Counted as churned if all tenants are deleted.</div>
+        <div class="assumption-flag">OK</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Customer IDs (Col B)</div>
+        <div class="assumption-treat">15A/15B, 62A/62B, 91A/91B treated as one customer. Parent/Child normalized to root customer.</div>
+        <div class="assumption-flag">Confirm</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-footer">
+    Synthetic data provided by Corelight · Analysis: Marissa LaMar · May 2026 · Source: Manual prod inspection + Pendo
+  </div>
+
+</div>
+
+<script>
+  // ── FILTER STATE ──
+  let activeView = 'all';
+  let activeRevenue = 'all';
+
+  // Data by view
+  const viewData = {
+    all:  { total: 95,  active: 82,  churned: 13,  winrate: '6.6%', tenants: 143, count: 95 },
+    won:  { total: 82,  active: 82,  churned: 0,   winrate: '—',    tenants: 135, count: 82 },
+    pov:  { total: '—', active: '—', churned: '—', winrate: '6.6%', tenants: '—', count: 158 },
+    lost: { total: 47,  active: 0,   churned: 47,  winrate: '—',    tenants: '—', count: 47 },
+  };
+
+  // Revenue filter adjusts active count
+  const revenueData = {
+    all:      { active: 82, label: '95' },
+    '500k':   { active: 7,  label: '7'  },
+    '100-500k':{ active: 18, label: '18' },
+    '50-100k':{ active: 14, label: '14' },
+    '<50k':   { active: 39, label: '39' },
+  };
+
+  function setView(v) {
+    activeView = v;
+    document.querySelectorAll('.filter-bar .filter-btn').forEach((b, i) => {
+      if (i < 4) b.classList.toggle('active', b.textContent.toLowerCase().includes(v) || (v==='all' && i===0));
+    });
+    updateDisplay();
+  }
+
+  function setRevenue(r) {
+    activeRevenue = r;
+    document.querySelectorAll('.filter-bar .filter-btn').forEach((b, i) => {
+      if (i >= 5 && i <= 9) {
+        const labels = ['all','500k','100-500k','50-100k','<50k'];
+        b.classList.toggle('active', labels[i-5] === r);
+      }
+    });
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    const d = viewData[activeView] || viewData.all;
+    const r = revenueData[activeRevenue] || revenueData.all;
+
+    // Update KPIs
+    document.getElementById('kpi-total').textContent = d.total;
+    document.getElementById('kpi-active').textContent = activeRevenue !== 'all' ? r.active : d.active;
+    document.getElementById('kpi-churned').textContent = d.churned;
+    document.getElementById('kpi-winrate').textContent = d.winrate;
+    document.getElementById('kpi-tenants').textContent = d.tenants;
+
+    // Update count
+    const count = activeRevenue !== 'all' ? r.label : d.count;
+    document.querySelector('#filter-count span').textContent = count;
+  }
+
+  function toggleAssumptions() {
+    const body = document.getElementById('assumptions-body');
+    const arrow = document.getElementById('toggle-arrow');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // Init revenue filter buttons
+  document.querySelectorAll('.filter-bar .filter-btn').forEach((b, i) => {
+    if (i === 0) b.classList.add('active');
+    if (i === 5) b.classList.add('active'); // 'All' revenue
+  });
+</script>
+
+</body>
+</html>
