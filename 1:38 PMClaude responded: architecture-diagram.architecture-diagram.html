@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Win-Loss Intelligence Architecture — Corelight</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F9FA;
+    --surface: #FFFFFF;
+    --border: #D0D7DE;
+    --border-dark: #8C959F;
+    --text: #1F2328;
+    --text-mid: #57606A;
+    --text-muted: #8C959F;
+    --green: #1A7F37;
+    --green-bg: #DAFBE1;
+    --green-border: #82CF9B;
+    --blue: #0550AE;
+    --blue-bg: #DDF4FF;
+    --blue-border: #79C0FF;
+    --purple: #6639BA;
+    --purple-bg: #FBEFFF;
+    --purple-border: #D2A8FF;
+    --orange: #953800;
+    --orange-bg: #FFF1E5;
+    --orange-border: #FFA657;
+    --annotation-bg: #FFFBDD;
+    --annotation-border: #D4A72C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-title { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); }
+  .header-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .header-meta { display: flex; align-items: center; gap: 12px; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 12px; border: 1px solid var(--border); color: var(--text-muted); }
+  .btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--text-mid); cursor: pointer; transition: all 0.15s; }
+  .btn:hover { border-color: var(--border-dark); color: var(--text); }
+  .btn.active { background: var(--annotation-bg); border-color: var(--annotation-border); color: var(--orange); }
+
+  .canvas { padding: 36px 48px; position: relative; }
+
+  .diagram {
+    display: grid;
+    grid-template-columns: 260px 72px 300px 72px 280px;
+    align-items: center;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .layer { display: flex; flex-direction: column; }
+
+  .layer-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-bottom: none;
+  }
+  .layer-header.sources { background: var(--blue-bg); color: var(--blue); border-color: var(--blue-border); }
+  .layer-header.synthesis { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
+  .layer-header.deliverable { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-border); }
+
+  .node {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+  .node:last-child { margin-bottom: 0; }
+  .node-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .node-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .node-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 1px 6px; border-radius: 10px; margin-top: 6px; margin-right: 4px; }
+  .tag-auto { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .tag-manual { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .tag-api { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+  .node.source { border-color: var(--blue-border); }
+  .node.synthesis-node { border-color: var(--green-border); background: var(--green-bg); padding: 16px; }
+  .node.deliverable-node { border-color: var(--purple-border); }
+
+  .synth-step { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; background: var(--surface); border-radius: 4px; border: 1px solid var(--green-border); margin-bottom: 6px; }
+  .synth-step:last-child { margin-bottom: 0; }
+  .synth-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--green); flex-shrink: 0; width: 18px; }
+  .synth-text { font-size: 11px; color: var(--text); line-height: 1.4; }
+
+  .arrow-col { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 4px; }
+  .arrow-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-muted); text-align: center; letter-spacing: 0.04em; }
+  svg.arrow-svg { width: 100%; height: 36px; overflow: visible; }
+
+  .query-line { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); display: flex; gap: 6px; align-items: flex-start; margin-top: 5px; }
+  .query-arrow { color: var(--purple); flex-shrink: 0; }
+
+  .legend {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: fit-content;
+  }
+  .legend-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-mid); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .footer { max-width: 1100px; margin: 16px auto 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); font-style: italic; padding-bottom: 32px; }
+
+  /* ANNOTATIONS */
+  .annotation-layer { position: fixed; inset: 65px 0 0 0; pointer-events: none; z-index: 50; }
+  .annotation-layer.active { pointer-events: all; cursor: crosshair; }
+  .annotation { position: absolute; background: var(--annotation-bg); border: 1.5px solid var(--annotation-border); border-radius: 6px; padding: 6px 10px; min-width: 140px; max-width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); pointer-events: all; z-index: 60; }
+  .annotation-pin { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--orange); letter-spacing: 0.06em; margin-bottom: 4px; cursor: grab; }
+  .annotation-text { font-size: 12px; color: var(--text); outline: none; width: 100%; min-height: 20px; background: transparent; border: none; resize: none; line-height: 1.4; font-family: 'Inter', sans-serif; }
+  .annotation-delete { position: absolute; top: -8px; right: -8px; width: 18px; height: 18px; border-radius: 50%; background: #CF222E; color: white; border: none; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; display: none; }
+  .annotation:hover .annotation-delete { display: block; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">Win-Loss Intelligence — System Architecture</div>
+    <div class="header-sub">Corelight · Product Operations · Marissa LaMar</div>
+  </div>
+  <div class="header-meta">
+    <span class="badge">v1 · May 2026</span>
+    <button class="btn" id="annotate-btn" onclick="toggleAnnotate()">✏ Add Note</button>
+    <button class="btn" onclick="clearAnnotations()">Clear Notes</button>
+  </div>
+</div>
+
+<div class="annotation-layer" id="annotation-layer" onclick="placeAnnotation(event)"></div>
+
+<div class="canvas">
+  <div class="diagram">
+
+    <!-- LAYER 1 -->
+    <div class="layer">
+      <div class="layer-header sources">Layer 1 · Data Sources</div>
+      <div class="node source">
+        <div class="node-title">Salesforce</div>
+        <div class="node-desc">Opportunities, deal stages, close reasons, potential ARR, competitor fields</div>
+        <span class="node-tag tag-auto">automated</span>
+        <span class="node-tag tag-api">API</span>
+      </div>
+      <div class="node source">
+        <div class="node-title">Zoom Transcripts</div>
+        <div class="node-desc">Sales calls, POV debriefs, discovery calls — raw conversation data</div>
+        <span class="node-tag tag-auto">automated</span>
+        <span class="node-tag tag-api">API</span>
+      </div>
+      <div class="node source">
+        <div class="node-title">UX / Market Research</div>
+        <div class="node-desc">Competitive analysis, analyst reports, win/loss interview notes</div>
+        <span class="node-tag tag-manual">manual upload</span>
+      </div>
+    </div>
+
+    <!-- ARROW 1 -->
+    <div class="arrow-col">
+      <div class="arrow-label">ingested</div>
+      <svg class="arrow-svg" viewBox="0 0 72 36">
+        <defs>
+          <marker id="a1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0,8 3,0 6" fill="#8C959F"/>
+          </marker>
+        </defs>
+        <line x1="4" y1="18" x2="62" y2="18" stroke="#8C959F" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a1)"/>
+      </svg>
+      <div class="arrow-label">bi-weekly</div>
+    </div>
+
+    <!-- LAYER 2 -->
+    <div class="layer">
+      <div class="layer-header synthesis">Layer 2 · Claude Synthesis</div>
+      <div class="node synthesis-node">
+        <div class="node-title" style="color:var(--green);font-size:13px;margin-bottom:12px;">claude-sonnet</div>
+        <div class="synth-step"><div class="synth-num">01</div><div class="synth-text">Tag by product area and feature area</div></div>
+        <div class="synth-step"><div class="synth-num">02</div><div class="synth-text">Find patterns within and across areas</div></div>
+        <div class="synth-step"><div class="synth-num">03</div><div class="synth-text">Attach potential ARR from Salesforce opportunities</div></div>
+        <div class="synth-step"><div class="synth-num">04</div><div class="synth-text">Surface themes with named evidence and source links</div></div>
+      </div>
+    </div>
+
+    <!-- ARROW 2 -->
+    <div class="arrow-col">
+      <div class="arrow-label">delivered</div>
+      <svg class="arrow-svg" viewBox="0 0 72 36">
+        <defs>
+          <marker id="a2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0,8 3,0 6" fill="#57606A"/>
+          </marker>
+        </defs>
+        <line x1="4" y1="18" x2="62" y2="18" stroke="#57606A" stroke-width="1.5" marker-end="url(#a2)"/>
+      </svg>
+      <div class="arrow-label">to PMs</div>
+    </div>
+
+    <!-- LAYER 3 -->
+    <div class="layer">
+      <div class="layer-header deliverable">Layer 3 · PM Deliverable</div>
+      <div class="node deliverable-node">
+        <div class="node-title">Shared Claude Project</div>
+        <div class="node-desc">Me + product team. Conversational — ask questions, get sourced answers. Vettable and improvable over time.</div>
+        <div class="query-line"><span class="query-arrow">→</span> "What did we lose to CrowdStrike in Q1?"</div>
+        <div class="query-line"><span class="query-arrow">→</span> "Which feature gaps appear most in lost deals?"</div>
+        <div class="query-line"><span class="query-arrow">→</span> "Show me the evidence for that."</div>
+      </div>
+      <div class="node deliverable-node">
+        <div class="node-title">Bi-Weekly Synthesis Report</div>
+        <div class="node-desc">Themes, revenue-weighted signals, top patterns. Delivered to PM leads. Zero behavior change required.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <span class="legend-title">INGESTION</span>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div>Automated via API — Salesforce, Zoom</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange);"></div>Manual upload — research docs, cadence-based</div>
+  </div>
+
+  <div class="footer">The last step is not automated. That's the point. — PMs evaluate, validate, and act on signal. Human judgment drives the decision.</div>
+</div>
+
+<script>
+  let annotating = false;
+
+  function toggleAnnotate() {
+    annotating = !annotating;
+    const layer = document.getElementById('annotation-layer');
+    const btn = document.getElementById('annotate-btn');
+    layer.classList.toggle('active', annotating);
+    btn.classList.toggle('active', annotating);
+    btn.textContent = annotating ? '✏ Click anywhere to place' : '✏ Add Note';
+  }
+
+  function placeAnnotation(e) {
+    if (!annotating) return;
+    const note = document.createElement('div');
+    note.className = 'annotation';
+    note.style.left = (e.clientX - 70) + 'px';
+    note.style.top = (e.clientY - 65) + 'px';
+
+    const pin = document.createElement('div');
+    pin.className = 'annotation-pin';
+    pin.textContent = '✎ note';
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'annotation-text';
+    textarea.placeholder = 'Type your note...';
+    textarea.rows = 2;
+
+    const del = document.createElement('button');
+    del.className = 'annotation-delete';
+    del.textContent = '×';
+    del.onclick = () => note.remove();
+
+    let dragging = false, ox, oy;
+    pin.style.cursor = 'grab';
+    pin.addEventListener('mousedown', ev => {
+      dragging = true;
+      ox = ev.clientX - note.offsetLeft;
+      oy = ev.clientY - note.offsetTop;
+      ev.preventDefault();
+    });
+    document.addEventListener('mousemove', ev => {
+      if (dragging) { note.style.left = (ev.clientX - ox) + 'px'; note.style.top = (ev.clientY - oy) + 'px'; }
+    });
+    document.addEventListener('mouseup', () => dragging = false);
+
+    note.appendChild(pin);
+    note.appendChild(textarea);
+    note.appendChild(del);
+    document.getElementById('annotation-layer').appendChild(note);
+    textarea.focus();
+
+    annotating = false;
+    document.getElementById('annotation-layer').classList.remove('active');
+    document.getElementById('annotate-btn').classList.remove('active');
+    document.getElementById('annotate-btn').textContent = '✏ Add Note';
+  }
+
+  function clearAnnotations() {
+    document.getElementById('annotation-layer').querySelectorAll('.annotation').forEach(n => n.remove());
+  }
+</script>
+</body>
+</html>
