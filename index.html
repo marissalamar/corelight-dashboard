@@ -604,6 +604,55 @@
 <!-- MAIN -->
 <div class="main">
 
+<!-- EXECUTIVE SUMMARY -->
+  <div style="background:var(--surface); border:1px solid var(--border-green); border-radius:8px; padding:24px 28px; margin-bottom:32px;">
+    <div style="font-size:9px; color:var(--green); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px;">Executive Summary</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div>
+        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px; letter-spacing:0.04em;">What the data shows</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">→</span>
+            <span><strong style="color:var(--text-mid);">82 active customers</strong> out of 95 ever won. 13.7% churn rate. 2 flagged at risk.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">→</span>
+            <span><strong style="color:var(--text-mid);">6.6% POV win rate</strong> on decided evaluations (5 won, 71 lost). Large in-progress pipeline.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">→</span>
+            <span><strong style="color:var(--text-mid);">48% of customers are sub-$50K ARR.</strong> Revenue is concentrated in a small number of large accounts.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">→</span>
+            <span><strong style="color:var(--text-mid);">46% of active customers had zero Pendo activity</strong> in the last 30 days. Dark accounts or seasonal pattern — unclear.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px; letter-spacing:0.04em;">Key conclusions</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--orange); flex-shrink:0;">01</span>
+            <span><strong style="color:var(--text-mid);">Engagement volume doesn't predict conversion.</strong> Lost prospects used the product more — more events, more minutes, more active days — than prospects who converted.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--blue); flex-shrink:0;">02</span>
+            <span><strong style="color:var(--text-mid);">More stakeholders in the trial, more likely to win.</strong> Unique visitors is the only metric where won POVs led (7 avg vs 5). Internal buy-in matters more than usage volume.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--yellow); flex-shrink:0;">⚑</span>
+            <span><strong style="color:var(--text-mid);">The "why" is not in this data.</strong> Win/loss reasons live in Zoom transcripts and Salesforce notes — not in Pendo engagement metrics.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5; font-style:italic;">
+            <span style="color:var(--text-muted); flex-shrink:0;">*</span>
+            <span>POV Won sample = 5. Conclusions 01 and 02 are directional — not statistically significant. Validate as pipeline grows.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- KPI ROW -->
   <div class="section-label">Overview</div>
   <div class="kpi-grid" id="kpi-grid">
@@ -765,60 +814,60 @@
       </div>
     </div>
 
-    <!-- Multi-tenant / Land & Expand -->
+    <!-- Multi-tenant / Customer Deployment Structure -->
     <div class="chart-card">
-      <div class="chart-title">Land &amp; Expand</div>
-      <div class="chart-sub">Multi-tenant customers · active</div>
+      <div class="chart-title">Customer Deployment Structure</div>
+      <div class="chart-sub">Some customers run multiple separate environments · active accounts</div>
       <div style="margin-top:16px; display:flex; flex-direction:column; gap:7px;">
-        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">TOP MULTI-TENANT ACCOUNTS</div>
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">CUSTOMERS WITH MULTIPLE ENVIRONMENTS</div>
         <!-- bars for top multi-tenant customers -->
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 39</div>
           <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
             <div style="width:100%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:20px;">20</div>
+          <div style="font-size:10px; color:var(--green); width:30px;">20</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 25</div>
           <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
             <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:20px;">10</div>
+          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 49</div>
           <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
             <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:20px;">10</div>
+          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 34</div>
           <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
             <div style="width:35%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:20px;">7</div>
+          <div style="font-size:10px; color:var(--green); width:30px;">7</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 29</div>
           <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
             <div style="width:25%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:20px;">5</div>
+          <div style="font-size:10px; color:var(--green); width:30px;">5</div>
         </div>
         <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
           <div style="text-align:center; flex:1;">
             <div style="font-size:24px; color:var(--blue); font-weight:500;">13</div>
-            <div style="font-size:9px; color:var(--text-muted);">multi-tenant</div>
+            <div style="font-size:9px; color:var(--text-muted);">multi-environment</div>
           </div>
           <div style="text-align:center; flex:1;">
             <div style="font-size:24px; color:var(--blue); font-weight:500;">69</div>
-            <div style="font-size:9px; color:var(--text-muted);">single tenant</div>
+            <div style="font-size:9px; color:var(--text-muted);">single environment</div>
           </div>
           <div style="text-align:center; flex:1;">
             <div style="font-size:24px; color:var(--blue); font-weight:500;">1.7x</div>
-            <div style="font-size:9px; color:var(--text-muted);">avg tenants</div>
+            <div style="font-size:9px; color:var(--text-muted);">avg per customer</div>
           </div>
         </div>
       </div>
@@ -873,6 +922,129 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- POV ENGAGEMENT ANALYSIS -->
+  <div class="section-label" style="margin-top:8px;">POV Engagement vs. Conversion</div>
+  <div class="chart-card" style="margin-bottom:32px;">
+    <div class="chart-title">Does product engagement during a POV predict whether we win?</div>
+    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · POV Won (n=5) vs POV Lost (n=71) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:32px;">
+
+      <!-- Left: the numbers -->
+      <div>
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME</div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <!-- Events -->
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:10px; color:var(--text-muted);">Events (all time)</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:37%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:50px;">3,208</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:63%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:50px;">5,442</div>
+            </div>
+          </div>
+
+          <!-- Minutes -->
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:39%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:50px;">299 min</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:61%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:50px;">468 min</div>
+            </div>
+          </div>
+
+          <!-- Active Days -->
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:41%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:50px;">17 days</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:59%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:50px;">25 days</div>
+            </div>
+          </div>
+
+          <!-- Visitors — the one that flips -->
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:9px; color:var(--green); letter-spacing:0.06em;">↑ Won leads on Visitors — the one signal that flips</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:58%; height:100%; background:var(--green); border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:50px;">7 visitors</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:42%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:50px;">5 visitors</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: interpretation -->
+      <div style="border-left:1px solid var(--border); padding-left:32px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">INTERPRETATION</div>
+
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--orange);">
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">Engagement volume doesn't predict conversion.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Lost prospects clicked more, spent more time, stayed longer. Raw engagement is not a win signal.</div>
+          </div>
+
+          <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--green);">
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">More stakeholders in the trial, more likely to win.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Won POVs had more unique visitors (7 avg vs 5). The only metric where Won leads — broader internal buy-in matters more than raw usage volume.</div>
+          </div>
+
+          <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--blue);">
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">The "why" is not in Pendo.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Reasons live in Salesforce opportunity notes and Zoom debrief transcripts. That's the data gap this architecture addresses.</div>
+          </div>
+
+          <div style="font-size:9px; color:var(--text-muted); font-style:italic; line-height:1.6; margin-top:4px;">
+            ⚑ n=5 for POV Won. Directional signal only — not statistically significant. Trends should be validated as pipeline grows.
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ASSUMPTIONS -->
@@ -932,6 +1104,11 @@
         <div class="assumption-raw">Customer IDs (Col B)</div>
         <div class="assumption-treat">15A/15B, 62A/62B, 91A/91B treated as one customer. Parent/Child normalized to root customer.</div>
         <div class="assumption-flag">Confirm</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Lost / Never POC-ed with Pendo data</div>
+        <div class="assumption-treat">Some "Lost / Never POC-ed" rows have all-time Pendo activity and recent 30-day data. Treated as customers who used the product but were never run through a formal POV process. May represent early churned customers. Needs clarification.</div>
+        <div class="assumption-flag" style="color:var(--orange);">Needs input</div>
       </div>
     </div>
   </div>
