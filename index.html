@@ -1152,9 +1152,9 @@
   function setRevenue(r) {
     activeRevenue = r;
     document.querySelectorAll('.filter-bar .filter-btn').forEach((b, i) => {
-      if (i >= 5 && i <= 9) {
+      if (i >= 4 && i <= 8) {
         const labels = ['all','500k','100-500k','50-100k','<50k'];
-        b.classList.toggle('active', labels[i-5] === r);
+        b.classList.toggle('active', labels[i-4] === r);
       }
     });
     updateDisplay();
@@ -1186,7 +1186,7 @@
   // Init revenue filter buttons
   document.querySelectorAll('.filter-bar .filter-btn').forEach((b, i) => {
     if (i === 0) b.classList.add('active');
-    if (i === 5) b.classList.add('active'); // 'All' revenue
+    if (i === 4) b.classList.add('active'); // 'All' revenue
   });
 </script>
 
