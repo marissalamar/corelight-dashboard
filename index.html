@@ -613,7 +613,7 @@
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
             <span style="color:var(--green); flex-shrink:0;">→</span>
-            <span><strong style="color:var(--text-mid);">82 active customers</strong> out of 95 ever won. 13.7% churn rate. 2 flagged at risk.</span>
+            <span><strong style="color:var(--text-mid);">81 active customers</strong> out of 95 ever won. 12.6% churn rate. 2 flagged at risk.</span>
           </div>
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
             <span style="color:var(--green); flex-shrink:0;">→</span>
@@ -663,13 +663,13 @@
     </div>
     <div class="kpi-card kpi-green">
       <div class="kpi-label">Active Customers</div>
-      <div class="kpi-value" id="kpi-active">82</div>
+      <div class="kpi-value" id="kpi-active">81</div>
       <div class="kpi-sub">at least 1 active tenant</div>
     </div>
     <div class="kpi-card kpi-orange">
       <div class="kpi-label">Churned</div>
-      <div class="kpi-value" id="kpi-churned">13</div>
-      <div class="kpi-sub">13.7% customer churn rate</div>
+      <div class="kpi-value" id="kpi-churned">12</div>
+      <div class="kpi-sub">12.6% customer churn rate</div>
     </div>
     <div class="kpi-card kpi-yellow">
       <div class="kpi-label">POV Win Rate</div>
@@ -760,7 +760,7 @@
           <div class="funnel-bar-track">
             <div class="funnel-bar-fill" style="width:51.9%; background:var(--yellow); opacity:0.5;"></div>
           </div>
-          <div class="funnel-num" style="color:var(--yellow);">82</div>
+          <div class="funnel-num" style="color:var(--yellow);">81</div>
         </div>
         <div class="funnel-stage" style="border-left-color: var(--text-muted);">
           <div class="funnel-name" style="color:var(--text-muted);">Win Rate (decided)</div>
@@ -797,7 +797,7 @@
             <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:10px;">CHURN STATUS</div>
             <div style="display:flex; gap:16px;">
               <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--green); font-weight:500;">82</div>
+                <div style="font-size:28px; color:var(--green); font-weight:500;">81</div>
                 <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">active</div>
               </div>
               <div style="text-align:center; flex:1;">
@@ -805,7 +805,7 @@
                 <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">at risk</div>
               </div>
               <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--orange); font-weight:500;">13</div>
+                <div style="font-size:28px; color:var(--orange); font-weight:500;">12</div>
                 <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">churned</div>
               </div>
             </div>
@@ -858,11 +858,11 @@
         </div>
         <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
           <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">13</div>
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">12</div>
             <div style="font-size:9px; color:var(--text-muted);">multi-environment</div>
           </div>
           <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">69</div>
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">68</div>
             <div style="font-size:9px; color:var(--text-muted);">single environment</div>
           </div>
           <div style="text-align:center; flex:1;">
@@ -1061,6 +1061,11 @@
         <div style="width:100px; text-align:right;">Flagged?</div>
       </div>
       <div class="assumption-row">
+        <div class="assumption-raw">Blank rows in Col B</div>
+        <div class="assumption-treat">Each blank treated as a unique, independent prospect. If two blanks represent the same company evaluated twice, pipeline counts may be overstated. This is the biggest assumption in the dataset.</div>
+        <div class="assumption-flag" style="color:var(--orange);">Key assumption</div>
+      </div>
+      <div class="assumption-row">
         <div class="assumption-raw">POV = POC</div>
         <div class="assumption-treat">Treated as the same stage. Both = proof of value evaluation.</div>
         <div class="assumption-flag">Confirm</div>
@@ -1126,15 +1131,15 @@
 
   // Data by view
   const viewData = {
-    all:  { total: 95,  active: 82,  churned: 13,  winrate: '6.6%', tenants: 143, count: 95 },
-    won:  { total: 82,  active: 82,  churned: 0,   winrate: '—',    tenants: 135, count: 82 },
+    all:  { total: 95,  active: 81,  churned: 12,  winrate: '6.6%', tenants: 143, count: 95 },
+    won:  { total: 81,  active: 81,  churned: 0,   winrate: '—',    tenants: 135, count: 81 },
     pov:  { total: '—', active: '—', churned: '—', winrate: '6.6%', tenants: '—', count: 158 },
     lost: { total: 47,  active: 0,   churned: 47,  winrate: '—',    tenants: '—', count: 47 },
   };
 
   // Revenue filter adjusts active count
   const revenueData = {
-    all:      { active: 82, label: '95' },
+    all:      { active: 81, label: '95' },
     '500k':   { active: 7,  label: '7'  },
     '100-500k':{ active: 18, label: '18' },
     '50-100k':{ active: 14, label: '14' },
