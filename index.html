@@ -634,16 +634,13 @@
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
             <span style="color:var(--orange); flex-shrink:0;">01</span>
-            <span><strong style="color:var(--text-mid);">Engagement volume doesn't predict conversion.</strong> Lost prospects used the product more — more events, more minutes, more active days — than prospects who converted.</span>
+            <span><strong style="color:var(--text-mid);">For customers: more engagement means less churn.</strong> Active customers lead churned across all four dimensions — events, minutes, active days, and unique visitors. Two outliers removed from churned pool (1M+ events, 45 visitors) which were skewing averages in a dataset of only 12.</span>
           </div>
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
             <span style="color:var(--blue); flex-shrink:0;">02</span>
-            <span><strong style="color:var(--text-mid);">More stakeholders in the trial, more likely to win.</strong> Unique visitors is the only metric where won POVs led (7 avg vs 5). Internal buy-in matters more than usage volume.</span>
+            <span><strong style="color:var(--text-mid);">For trials: volume doesn't predict conversion. Breadth does.</strong> Lost prospects had more events, minutes, and active days. Won POVs had more unique visitors (7 avg vs 5). Internal buy-in matters more than usage volume.</span>
           </div>
-          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--yellow); flex-shrink:0;">⚑</span>
-            <span><strong style="color:var(--text-mid);">The "why" is not in this data.</strong> Win/loss reasons live in Zoom transcripts and Salesforce notes — not in Pendo engagement metrics.</span>
-          </div>
+
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5; font-style:italic;">
             <span style="color:var(--text-muted); flex-shrink:0;">*</span>
             <span>POV Won sample = 5. Conclusions 01 and 02 are directional — not statistically significant. Validate as pipeline grows.</span>
@@ -673,8 +670,8 @@
     </div>
     <div class="kpi-card kpi-yellow">
       <div class="kpi-label">POV Win Rate</div>
-      <div class="kpi-value" id="kpi-winrate">6.6%</div>
-      <div class="kpi-sub">5 won · 71 lost of decided</div>
+      <div class="kpi-value" id="kpi-winrate">7.7%</div>
+      <div class="kpi-sub">6 won · 72 lost of decided</div>
     </div>
     <div class="kpi-card kpi-blue">
       <div class="kpi-label">Active Tenants</div>
@@ -767,7 +764,7 @@
           <div class="funnel-bar-track">
             <div class="funnel-bar-fill" style="width:6.6%; background:var(--green); opacity:0.9;"></div>
           </div>
-          <div class="funnel-num" style="color:var(--green);">6.6%</div>
+          <div class="funnel-num" style="color:var(--green);">7.7%</div>
         </div>
       </div>
     </div>
@@ -925,93 +922,186 @@
   </div>
 
   <!-- POV ENGAGEMENT ANALYSIS -->
-  <div class="section-label" style="margin-top:8px;">POV Engagement vs. Conversion</div>
+  <div class="section-label" style="margin-top:8px;">Dataset 1: Customer Engagement vs. Churn</div>
+  <div class="chart-card" style="margin-bottom:20px;">
+    <div class="chart-title">Does product engagement predict whether a customer churns?</div>
+    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · Active customers (n=127, 1 outlier excluded) vs Churned (n=10, 2 outliers excluded) · <span style="color:var(--yellow);">⚑ Churned pool is small — treat as directional</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+      <div>
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Events (all time)</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:70px; font-size:9px; color:var(--green); text-align:right;">Active</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:67%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:60px;">31,768</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:70px; font-size:9px; color:var(--orange); text-align:right;">Churned</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:33%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:60px;">15,672</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Minutes (all time)</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:70px; font-size:9px; color:var(--green); text-align:right;">Active</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:60%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:60px;">2,285</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:70px; font-size:9px; color:var(--orange); text-align:right;">Churned</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:40%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:60px;">1,535</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Active Days (all time)</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:70px; font-size:9px; color:var(--green); text-align:right;">Active</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:59%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:60px;">112 days</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:70px; font-size:9px; color:var(--orange); text-align:right;">Churned</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:41%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:60px;">78 days</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Unique Visitors (all time)</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <div style="width:70px; font-size:9px; color:var(--green); text-align:right;">Active</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:59%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--green); width:60px;">11.7 avg</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:70px; font-size:9px; color:var(--orange); text-align:right;">Churned</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:35%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:10px; color:var(--orange); width:60px;">8.2 avg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-left:1px solid var(--border); padding-left:32px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">INTERPRETATION</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--green);">
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">Higher activity = less likely to churn — consistent across all four dimensions.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Active customers lead churned across events, minutes, active days, and unique visitors. Both outliers removed. The more embedded in the product, the harder it is to leave.</div>
+          </div>
+
+          <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--orange);">
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">⚑ Dataset caveat.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Only 10 churned customers after removing 2 outliers. Treat as directional signal — not statistically significant. Validate as more churn data accumulates.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:8px;">Dataset 2: POV Engagement vs. Conversion</div>
   <div class="chart-card" style="margin-bottom:32px;">
-    <div class="chart-title">Does product engagement during a POV predict whether we win?</div>
-    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · POV Won (n=5) vs POV Lost (n=71) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
+    <div class="chart-title">Does trial engagement predict whether we win the deal?</div>
+    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data (= trial activity) · POV Won (n=6) vs POV Lost (n=72) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
 
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:32px;">
 
       <!-- Left: the numbers -->
       <div>
-        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME</div>
-        <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME — all-time = trial activity</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
 
           <!-- Events -->
           <div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-size:10px; color:var(--text-muted);">Events (all time)</span>
-            </div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Events — Lost leads</div>
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
               <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:37%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+                <div style="width:38%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--green); width:50px;">3,208</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">3,401 avg</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:63%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+                <div style="width:62%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--orange); width:50px;">5,442</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">5,442 avg</div>
             </div>
           </div>
 
           <!-- Minutes -->
           <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Minutes — Lost leads</div>
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
               <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:39%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+                <div style="width:40%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--green); width:50px;">299 min</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">317 avg</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:61%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+                <div style="width:60%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--orange); width:50px;">468 min</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">468 avg</div>
             </div>
           </div>
 
           <!-- Active Days -->
           <div>
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:6px;">Active Days — Lost leads</div>
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
               <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:41%; height:100%; background:var(--green); opacity:0.7; border-radius:3px;"></div>
+                <div style="width:42%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--green); width:50px;">17 days</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">18 avg</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-                <div style="width:59%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
+                <div style="width:58%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--orange); width:50px;">25 days</div>
+              <div style="font-size:10px; color:var(--text-muted); width:60px;">25 avg</div>
             </div>
           </div>
 
-          <!-- Visitors — the one that flips -->
+          <!-- Visitors — the flip -->
           <div>
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-size:9px; color:var(--green); letter-spacing:0.06em;">↑ Won leads on Visitors — the one signal that flips</span>
-            </div>
+            <div style="font-size:10px; color:var(--green); margin-bottom:6px;">↑ Unique Visitors — Won leads. The only signal that flips.</div>
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
               <div style="width:60px; font-size:9px; color:var(--green); text-align:right;">Won</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
                 <div style="width:58%; height:100%; background:var(--green); border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--green); width:50px;">7 visitors</div>
+              <div style="font-size:10px; color:var(--green); width:60px;">7 avg</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="width:60px; font-size:9px; color:var(--orange); text-align:right;">Lost</div>
               <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
                 <div style="width:42%; height:100%; background:var(--orange); opacity:0.6; border-radius:3px;"></div>
               </div>
-              <div style="font-size:10px; color:var(--orange); width:50px;">5 visitors</div>
+              <div style="font-size:10px; color:var(--orange); width:60px;">5 avg</div>
             </div>
           </div>
 
@@ -1024,7 +1114,7 @@
 
         <div style="display:flex; flex-direction:column; gap:14px;">
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--orange);">
-            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">Engagement volume doesn't predict conversion.</div>
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">For trials: volume doesn't predict conversion. Breadth does.</div>
             <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Lost prospects clicked more, spent more time, stayed longer. Raw engagement is not a win signal.</div>
           </div>
 
@@ -1034,7 +1124,7 @@
           </div>
 
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--blue);">
-            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">The "why" is not in Pendo.</div>
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">For customers: more engagement = less churn. Low 30-day activity in active accounts (44%) is worth watching as an early churn signal.</div>
             <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Reasons live in Salesforce opportunity notes and Zoom debrief transcripts. That's the data gap this architecture addresses.</div>
           </div>
 
@@ -1059,6 +1149,16 @@
         <div style="width:160px;">Raw Value (Col D/E)</div>
         <div style="flex:1;">Treatment</div>
         <div style="width:100px; text-align:right;">Flagged?</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">1M+ events — churned customer</div>
+        <div class="assumption-treat">Customer 12 had 1,021,049 all-time events — far outside normal range. Excluded from Active vs Churned engagement analysis as it severely skewed averages across a pool of only 12 churned customers.</div>
+        <div class="assumption-flag" style="color:var(--orange);">Outlier removed</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">45 visitors — churned customer</div>
+        <div class="assumption-treat">Customer 4 had 45 unique visitors — far outside the rest of the churned pool (next highest: 25). Excluded from unique visitors dimension only, as it was pulling the churned average above active and creating a misleading signal in an already small dataset (n=11).</div>
+        <div class="assumption-flag" style="color:var(--orange);">Outlier removed</div>
       </div>
       <div class="assumption-row">
         <div class="assumption-raw">Blank rows in Col B</div>
@@ -1131,9 +1231,9 @@
 
   // Data by view
   const viewData = {
-    all:  { total: 95,  active: 81,  churned: 12,  winrate: '6.6%', tenants: 143, count: 95 },
+    all:  { total: 95,  active: 81,  churned: 12,  winrate: '7.7%', tenants: 143, count: 95 },
     won:  { total: 81,  active: 81,  churned: 0,   winrate: '—',    tenants: 135, count: 81 },
-    pov:  { total: '—', active: '—', churned: '—', winrate: '6.6%', tenants: '—', count: 158 },
+    pov:  { total: '—', active: '—', churned: '—', winrate: '7.7%', tenants: '—', count: 158 },
     lost: { total: 47,  active: 0,   churned: 47,  winrate: '—',    tenants: '—', count: 47 },
   };
 
