@@ -574,64 +574,63 @@
 <!-- MAIN -->
 <div class="main">
 
-<!-- EXECUTIVE SUMMARY -->
-  <div style="background:var(--surface); border:1px solid var(--border-green); border-radius:8px; padding:24px 28px; margin-bottom:32px;">
-    <div style="font-size:9px; color:var(--green); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px;">Executive Summary</div>
+<!-- CALL TO ACTION -->
+  <div style="background:var(--surface); border:1px solid var(--border-green); border-radius:8px; padding:24px 28px; margin-bottom:24px;">
+    <div style="font-size:9px; color:var(--green); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px;">Call to Action</div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
       <div>
-        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px; letter-spacing:0.04em;">What the data shows</div>
+        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px;">Immediate priorities</div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--green); flex-shrink:0;">→</span>
-            <span><strong style="color:var(--text-mid);">81 active customers</strong> out of 95 ever won. 12.6% churn rate. 2 flagged at risk.</span>
+            <span style="color:var(--orange); flex-shrink:0; font-weight:700;">01</span>
+            <span><strong style="color:var(--text-mid);">Investigate Account 18 (500K+).</strong> Below churn averages on all four dimensions. No activity in last 30 days. Highest revenue account on the watch list.</span>
           </div>
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--green); flex-shrink:0;">→</span>
-            <span><strong style="color:var(--text-mid);">6.6% POV win rate</strong> on decided evaluations (5 won, 71 lost). Large in-progress pipeline.</span>
+            <span style="color:var(--orange); flex-shrink:0; font-weight:700;">02</span>
+            <span><strong style="color:var(--text-mid);">Review Accounts 47 and 74 (100-500K each).</strong> Near-zero all-time engagement. These accounts may never have fully adopted the product.</span>
           </div>
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--green); flex-shrink:0;">→</span>
-            <span><strong style="color:var(--text-mid);">48% of customers are sub-$50K ARR.</strong> Revenue is concentrated in a small number of large accounts.</span>
-          </div>
-          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--green); flex-shrink:0;">→</span>
-            <span><strong style="color:var(--text-mid);">46% of active customers had zero Pendo activity</strong> in the last 30 days. Dark accounts or seasonal pattern — unclear.</span>
+            <span style="color:var(--yellow); flex-shrink:0; font-weight:700;">03</span>
+            <span><strong style="color:var(--text-mid);">21% of active accounts (17 total) show churn risk patterns.</strong> Below churned customer averages on 3+ dimensions with zero 30-day activity. See watch list below.</span>
           </div>
         </div>
       </div>
       <div>
-        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px; letter-spacing:0.04em;">Key conclusions</div>
+        <div style="font-size:11px; color:var(--text-mid); font-weight:500; margin-bottom:10px;">What the data shows</div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--orange); flex-shrink:0;">01</span>
-            <span><strong style="color:var(--text-mid);">For customers: more engagement means less churn.</strong> Active customers lead churned across all four dimensions — events, minutes, active days, and unique visitors. Two outliers removed from churned pool (1M+ events, 45 visitors) which were skewing averages in a dataset of only 12.</span>
+            <span style="color:var(--green); flex-shrink:0;">&#8594;</span>
+            <span><strong style="color:var(--text-mid);">81 active customers</strong> out of 95 ever won. 14 churned (14.7% churn rate).</span>
           </div>
           <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
-            <span style="color:var(--blue); flex-shrink:0;">02</span>
-            <span><strong style="color:var(--text-mid);">For trials: volume doesn't predict conversion. Breadth does.</strong> Lost prospects had more events, minutes, and active days. Won POVs had more unique visitors (7 avg vs 5). Internal buy-in matters more than usage volume.</span>
+            <span style="color:var(--green); flex-shrink:0;">&#8594;</span>
+            <span><strong style="color:var(--text-mid);">7.7% POV win rate</strong> on decided evaluations (6 won, 72 lost). 71 POVs with no outcome recorded.</span>
           </div>
-
-          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5; font-style:italic;">
-            <span style="color:var(--text-muted); flex-shrink:0;">*</span>
-            <span>POV Won sample = 5. Conclusions 01 and 02 are directional — not statistically significant. Validate as pipeline grows.</span>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">&#8594;</span>
+            <span><strong style="color:var(--text-mid);">Higher engagement = lower churn</strong> consistent across events, minutes, active days, and visitors.</span>
+          </div>
+          <div style="display:flex; gap:10px; font-size:10px; color:var(--text-muted); line-height:1.5;">
+            <span style="color:var(--green); flex-shrink:0;">&#8594;</span>
+            <span><strong style="color:var(--text-mid);">In POVs, unique visitors predicts conversion</strong> won POVs had more stakeholders (7 vs 5 avg).</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-    <!-- KPI ROW -->
+<!-- KPI ROW -->
   <div class="section-label">Overview</div>
   <div class="kpi-grid" id="kpi-grid">
     <div class="kpi-card kpi-green">
       <div class="kpi-label">Active Customers</div>
       <div class="kpi-value" id="kpi-active">81</div>
-      <div class="kpi-sub">81 active · 2 at-risk · 12 churned</div>
+      <div class="kpi-sub">81 active · 14 churned</div>
     </div>
     <div class="kpi-card kpi-orange">
       <div class="kpi-label">Churned</div>
-      <div class="kpi-value" id="kpi-churned">12</div>
-      <div class="kpi-sub">12.6% churn rate</div>
+      <div class="kpi-value" id="kpi-churned">14</div>
+      <div class="kpi-sub">14.7% churn rate</div>
     </div>
     <div class="kpi-card kpi-yellow">
       <div class="kpi-label">POV Win Rate</div>
@@ -642,6 +641,138 @@
       <div class="kpi-label">30-Day Active</div>
       <div class="kpi-value">74%</div>
       <div class="kpi-sub">26% dark across all environments</div>
+    </div>
+  </div>
+
+
+  <!-- WATCH LIST -->
+  <div class="section-label" style="margin-top:8px;">Accounts to Watch</div>
+  <div class="chart-card" style="margin-bottom:24px;">
+    <div class="chart-title">21% of active accounts (17) flagged for churn risk</div>
+    <div class="chart-sub" style="margin-bottom:16px;">Below churned customer averages on 3+ dimensions with zero 30-day activity &middot; E=Events &middot; M=Minutes &middot; D=Days &middot; V=Visitors &middot; Orange border = higher revenue</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px;">
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--orange); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 18</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">500K+</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--orange); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 47</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">100-500K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--orange); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 74</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">100-500K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 41</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">50-100K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 27</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">50-100K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 78</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">50-100K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 88</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">50-100K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 14</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 32</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 36</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 40</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">unknown</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 68</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 70</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 73</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 83</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">unknown</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 85</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+      <div style="background:var(--surface3); border-radius:5px; padding:10px 14px; border-left:3px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:11px; color:var(--text-mid); font-weight:500;">Account 89</div>
+          <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">&lt;50K</div>
+        </div>
+        <div style="font-size:9px; color:var(--orange); font-family:monospace;">E,M,D,V</div>
+      </div>
+    </div>
+    <div style="font-size:9px; color:var(--text-muted); font-style:italic;">
+      Churned averages used as threshold: Events 15,415 &middot; Minutes 1,619 &middot; Active Days 103 &middot; Visitors 10.7 &middot; Based on 12 churned accounts after outlier removal &middot; Low engagement may reflect embedded workflows &mdash; CS context needed before acting
     </div>
   </div>
 
@@ -772,7 +903,7 @@
         </div>
 
         <div style="flex:1;">
-          <div style="font-size:9px; color:var(--orange); letter-spacing:0.1em; margin-bottom:10px;">CHURNED (n=12)</div>
+          <div style="font-size:9px; color:var(--orange); letter-spacing:0.1em; margin-bottom:10px;">CHURNED (n=14)</div>
           <div style="display:flex; flex-direction:column; gap:6px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <div style="font-size:9px; color:var(--text-muted); width:60px;">&lt;50K</div>
@@ -822,18 +953,15 @@
             <div style="font-size:32px; color:var(--green); font-weight:500;">81</div>
             <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">active</div>
           </div>
+
           <div style="text-align:center; flex:1; padding:16px; background:var(--surface3); border-radius:6px;">
-            <div style="font-size:32px; color:var(--yellow); font-weight:500;">2</div>
-            <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">at-risk</div>
-          </div>
-          <div style="text-align:center; flex:1; padding:16px; background:var(--surface3); border-radius:6px;">
-            <div style="font-size:32px; color:var(--orange); font-weight:500;">12</div>
+            <div style="font-size:32px; color:var(--orange); font-weight:500;">14</div>
             <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">churned</div>
           </div>
         </div>
         <div style="padding:12px 16px; background:var(--surface3); border-radius:6px; border-left:3px solid var(--orange);">
-          <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">12.6% customer churn rate</div>
-          <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">All-time, across 95 ever-won customers. 2 outliers removed from churn engagement analysis.</div>
+          <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">14.7% customer churn rate</div>
+          <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">All-time, across 95 ever-won customers. 2 outliers removed from churn engagement analysis (pool of 14).</div>
         </div>
         <div style="padding:12px 16px; background:var(--surface3); border-radius:6px; border-left:3px solid var(--yellow);">
           <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">26% of customers dark across all environments</div>
@@ -851,7 +979,7 @@
 <div class="section-label" style="margin-top:8px;">Does product engagement predict churn?</div>
   <div class="chart-card" style="margin-bottom:20px;">
     <div class="chart-title">Does product engagement predict whether a customer churns?</div>
-    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · Active customers (n=127, 1 outlier excluded) vs Churned (n=10, 2 outliers excluded) · <span style="color:var(--yellow);">⚑ Churned pool is small — treat as directional</span></div>
+    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · Active customers (n=147, 1 outlier excluded) vs Churned (n=10, 2 outliers excluded) · <span style="color:var(--yellow);">⚑ Churned pool is small — treat as directional</span></div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
       <div>
         <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME</div>
@@ -936,7 +1064,7 @@
 
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--orange);">
             <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">⚑ Dataset caveat.</div>
-            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Only 10 churned customers after removing 2 outliers. Treat as directional signal — not statistically significant. Validate as more churn data accumulates.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Only 12 churned customers after removing 2 outliers from pool of 14. Treat as directional signal — not statistically significant. Validate as more churn data accumulates.</div>
           </div>
         </div>
       </div>
@@ -946,13 +1074,13 @@
   <div class="section-label" style="margin-top:8px;">Does POV engagement predict whether we win?</div>
   <div class="chart-card" style="margin-bottom:32px;">
     <div class="chart-title">Does POV engagement predict whether we win?</div>
-    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data (= trial activity) · POV Won (n=6) vs POV Lost (n=72) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
+    <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data (= POV activity) · POV Won (n=6) vs POV Lost (n=72) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
 
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:32px;">
 
       <!-- Left: the numbers -->
       <div>
-        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME — all-time = trial activity</div>
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:14px;">AVERAGE ENGAGEMENT BY OUTCOME — all-time = POV activity</div>
         <div style="display:flex; flex-direction:column; gap:14px;">
 
           <!-- Events -->
@@ -1040,12 +1168,12 @@
 
         <div style="display:flex; flex-direction:column; gap:14px;">
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--orange);">
-            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">For trials: volume doesn't predict conversion. Breadth does.</div>
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">For POVs: volume doesn't predict conversion. Breadth does.</div>
             <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Lost prospects clicked more, spent more time, stayed longer. Raw engagement is not a win signal.</div>
           </div>
 
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--green);">
-            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">More stakeholders in the trial, more likely to win.</div>
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">More stakeholders in the POV, more likely to win.</div>
             <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Won POVs had more unique visitors (7 avg vs 5). The only metric where Won leads — broader internal buy-in matters more than raw usage volume.</div>
           </div>
 
@@ -1093,10 +1221,10 @@
               </div>
               <div style="text-align:center; flex:1;">
                 <div style="font-size:28px; color:var(--yellow); font-weight:500;">2</div>
-                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">at risk</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">will churn</div>
               </div>
               <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--orange); font-weight:500;">12</div>
+                <div style="font-size:28px; color:var(--orange); font-weight:500;">14</div>
                 <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">churned</div>
               </div>
             </div>
@@ -1149,7 +1277,7 @@
         </div>
         <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
           <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">12</div>
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">14</div>
             <div style="font-size:9px; color:var(--text-muted);">multi-environment</div>
           </div>
           <div style="text-align:center; flex:1;">
@@ -1246,7 +1374,7 @@
       </div>
       <div class="assumption-row">
         <div class="assumption-raw">45 visitors — churned customer</div>
-        <div class="assumption-treat">Customer 4 had 45 unique visitors — far outside the rest of the churned pool (next highest: 25). Excluded from unique visitors dimension only, as it was pulling the churned average above active and creating a misleading signal in an already small dataset (n=11).</div>
+        <div class="assumption-treat">Customer 4 had 45 unique visitors — far outside the rest of the churned pool (next highest: 25). Excluded from unique visitors dimension only, as it was pulling the churned average above active and creating a misleading signal in an already small dataset (n=12).</div>
         <div class="assumption-flag" style="color:var(--orange);">Outlier removed</div>
       </div>
       <div class="assumption-row">
@@ -1291,7 +1419,7 @@
       </div>
       <div class="assumption-row">
         <div class="assumption-raw">Won/Will churn</div>
-        <div class="assumption-treat">Counted as active, flagged separately as at-risk (2 customers).</div>
+        <div class="assumption-treat">Counted as active, flagged separately as confirmed departures.</div>
         <div class="assumption-flag">OK</div>
       </div>
       <div class="assumption-row">
@@ -1325,7 +1453,7 @@
 
   // Data by view
   const viewData = {
-    all:  { total: 95,  active: 81,  churned: 12,  winrate: '7.7%', tenants: 143, count: 95 },
+    all:  { total: 95,  active: 81,  churned: 14,  winrate: '7.7%', tenants: 143, count: 95 },
     won:  { total: 81,  active: 81,  churned: 0,   winrate: '—',    tenants: 135, count: 81 },
     pov:  { total: '—', active: '—', churned: '—', winrate: '7.7%', tenants: '—', count: 158 },
     lost: { total: 47,  active: 0,   churned: 47,  winrate: '—',    tenants: '—', count: 47 },
