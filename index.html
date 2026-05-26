@@ -563,43 +563,13 @@
     transition: opacity 0.2s;
   }
 </style>
-</head>
-<body>
-
 <!-- HEADER -->
 <div class="header">
   <div class="header-left">
     <div class="logo-dot"></div>
-    <div>
-      <div class="header-title">State of Platform</div>
-      <div class="header-sub">Corelight · Synthetic data · Analysis by Marissa LaMar</div>
-    </div>
-  </div>
-  <div class="header-meta">
-    Data window: 2021 – May 2026<br>
-    Engagement snapshot: <span>Apr 13 – May 12, 2026</span>
-  </div>
-</div>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <span class="filter-label">View</span>
-  <button class="filter-btn active" onclick="setView('all')">All Accounts</button>
-  <button class="filter-btn" onclick="setView('won')">Won / Active</button>
-  <button class="filter-btn" onclick="setView('pov')">POV Pipeline</button>
-  <button class="filter-btn" onclick="setView('lost')">Lost</button>
-
-  <div class="filter-divider"></div>
-
-  <span class="filter-label">Revenue</span>
-  <button class="filter-btn" onclick="setRevenue('all')">All</button>
-  <button class="filter-btn" onclick="setRevenue('500k')">500K+</button>
-  <button class="filter-btn" onclick="setRevenue('100-500k')">100–500K</button>
-  <button class="filter-btn" onclick="setRevenue('50-100k')">50–100K</button>
-  <button class="filter-btn" onclick="setRevenue('<50k')">&lt;50K</button>
-
-  <div class="filter-count" id="filter-count">Showing <span>95</span> customers</div>
-</div>
+<!-- ANNOTATION LAYER -->
+<div class="annotation-layer" id="annotation-layer" onclick="placeAnnotation(event)"></div>
 
 <!-- MAIN -->
 <div class="main">
@@ -650,290 +620,235 @@
     </div>
   </div>
 
-  <!-- KPI ROW -->
+    <!-- KPI ROW -->
   <div class="section-label">Overview</div>
   <div class="kpi-grid" id="kpi-grid">
     <div class="kpi-card kpi-green">
-      <div class="kpi-label">Total Customers Won</div>
-      <div class="kpi-value" id="kpi-total">95</div>
-      <div class="kpi-sub">all time</div>
-    </div>
-    <div class="kpi-card kpi-green">
       <div class="kpi-label">Active Customers</div>
       <div class="kpi-value" id="kpi-active">81</div>
-      <div class="kpi-sub">at least 1 active tenant</div>
+      <div class="kpi-sub">81 active · 2 at-risk · 12 churned</div>
     </div>
     <div class="kpi-card kpi-orange">
       <div class="kpi-label">Churned</div>
       <div class="kpi-value" id="kpi-churned">12</div>
-      <div class="kpi-sub">12.6% customer churn rate</div>
+      <div class="kpi-sub">12.6% churn rate</div>
     </div>
     <div class="kpi-card kpi-yellow">
       <div class="kpi-label">POV Win Rate</div>
       <div class="kpi-value" id="kpi-winrate">7.7%</div>
-      <div class="kpi-sub">6 won · 72 lost of decided</div>
+      <div class="kpi-sub">6 won · 72 lost · decided POVs only</div>
     </div>
-    <div class="kpi-card kpi-blue">
-      <div class="kpi-label">Active Tenants</div>
-      <div class="kpi-value" id="kpi-tenants">143</div>
-      <div class="kpi-sub">avg 1.7 per customer</div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">30-Day Active</div>
+      <div class="kpi-value">74%</div>
+      <div class="kpi-sub">26% dark across all environments</div>
     </div>
   </div>
 
-  <!-- ROW 2: Revenue + POV Funnel -->
+  <!-- ROW 2: Revenue + Pipeline -->
   <div class="two-col">
 
     <!-- Revenue Distribution -->
     <div class="chart-card">
       <div class="chart-title">Revenue Distribution</div>
-      <div class="chart-sub">Active customers by ARR bucket</div>
-      <div class="bar-chart" id="rev-chart">
+      <div class="chart-sub">Active customers (n=81) by ARR bucket</div>
+      <div class="bar-chart" style="margin-top:16px;">
         <div class="bar-row">
           <div class="bar-label">&lt;50K</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:48%; background: var(--green); opacity:0.5;"></div>
-          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:48%; background:var(--green); opacity:0.5;"></div></div>
           <div class="bar-value">39</div>
         </div>
         <div class="bar-row">
           <div class="bar-label">50–100K</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:17%; background: var(--green); opacity:0.65;"></div>
-          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:17%; background:var(--green); opacity:0.65;"></div></div>
           <div class="bar-value">14</div>
         </div>
         <div class="bar-row">
           <div class="bar-label">100–500K</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:22%; background: var(--green); opacity:0.8;"></div>
-          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:22%; background:var(--green); opacity:0.8;"></div></div>
           <div class="bar-value">18</div>
         </div>
         <div class="bar-row">
           <div class="bar-label">500K+</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:9%; background: var(--green);"></div>
-          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:9%; background:var(--green);"></div></div>
           <div class="bar-value">7</div>
         </div>
         <div class="bar-row">
           <div class="bar-label">Unknown</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:5%; background: var(--text-muted); opacity:0.4;"></div>
-          </div>
-          <div class="bar-value">4</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4%; background:var(--text-muted); opacity:0.4;"></div></div>
+          <div class="bar-value">3</div>
         </div>
       </div>
     </div>
 
-    <!-- POV Funnel -->
+    <!-- Pipeline Breakdown -->
     <div class="chart-card">
-      <div class="chart-title">POV Pipeline</div>
-      <div class="chart-sub">Proof of value conversion funnel · all time</div>
-      <div class="funnel">
-        <div class="funnel-stage" style="border-left-color: var(--blue);">
+      <div class="chart-title">Pipeline Breakdown</div>
+      <div class="chart-sub">Blank col B rows only · PRIME/ORG excluded · Never POC-ed shown for context only</div>
+      <div class="funnel" style="margin-top:16px;">
+        <div class="funnel-stage" style="border-left-color:var(--blue);">
           <div class="funnel-name" style="color:var(--blue);">Total POVs</div>
-          <div class="funnel-bar-track">
-            <div class="funnel-bar-fill" style="width:100%; background:var(--blue); opacity:0.4;"></div>
-          </div>
-          <div class="funnel-num" style="color:var(--blue);">158</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:100%; background:var(--blue); opacity:0.4;"></div></div>
+          <div class="funnel-num" style="color:var(--blue);">162</div>
         </div>
-        <div class="funnel-stage" style="border-left-color: var(--green);">
-          <div class="funnel-name" style="color:var(--green);">POV Won</div>
-          <div class="funnel-bar-track">
-            <div class="funnel-bar-fill" style="width:3.2%; background:var(--green);"></div>
-          </div>
-          <div class="funnel-num" style="color:var(--green);">5</div>
+        <div class="funnel-stage" style="border-left-color:var(--green);">
+          <div class="funnel-name" style="color:var(--green);">Won</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:3.7%; background:var(--green);"></div></div>
+          <div class="funnel-num" style="color:var(--green);">6</div>
         </div>
-        <div class="funnel-stage" style="border-left-color: var(--orange);">
-          <div class="funnel-name" style="color:var(--orange);">POV Lost</div>
-          <div class="funnel-bar-track">
-            <div class="funnel-bar-fill" style="width:44.9%; background:var(--orange); opacity:0.7;"></div>
-          </div>
-          <div class="funnel-num" style="color:var(--orange);">71</div>
+        <div class="funnel-stage" style="border-left-color:var(--orange);">
+          <div class="funnel-name" style="color:var(--orange);">Lost</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:44.4%; background:var(--orange); opacity:0.7;"></div></div>
+          <div class="funnel-num" style="color:var(--orange);">72</div>
         </div>
-        <div class="funnel-stage" style="border-left-color: var(--yellow);">
-          <div class="funnel-name" style="color:var(--yellow);">Active / No Dec</div>
-          <div class="funnel-bar-track">
-            <div class="funnel-bar-fill" style="width:51.9%; background:var(--yellow); opacity:0.5;"></div>
-          </div>
-          <div class="funnel-num" style="color:var(--yellow);">81</div>
+        <div class="funnel-stage" style="border-left-color:var(--green);">
+          <div class="funnel-name" style="color:var(--green);">Active Trial</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:8.6%; background:var(--green); opacity:0.5;"></div></div>
+          <div class="funnel-num" style="color:var(--green);">14</div>
         </div>
-        <div class="funnel-stage" style="border-left-color: var(--text-muted);">
-          <div class="funnel-name" style="color:var(--text-muted);">Win Rate (decided)</div>
-          <div class="funnel-bar-track">
-            <div class="funnel-bar-fill" style="width:6.6%; background:var(--green); opacity:0.9;"></div>
-          </div>
+        <div class="funnel-stage" style="border-left-color:var(--yellow);">
+          <div class="funnel-name" style="color:var(--yellow);">No Outcome Recorded</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:43.8%; background:var(--yellow); opacity:0.5;"></div></div>
+          <div class="funnel-num" style="color:var(--yellow);">71</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color:var(--text-muted);">
+          <div class="funnel-name" style="color:var(--text-muted);">Never Reached Trial</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:29.6%; background:var(--text-muted); opacity:0.3;"></div></div>
+          <div class="funnel-num" style="color:var(--text-muted);">47</div>
+        </div>
+        <div class="funnel-stage" style="border-left-color:var(--text-muted);">
+          <div class="funnel-name" style="color:var(--green);">Win Rate (decided)</div>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:7.7%; background:var(--green); opacity:0.9;"></div></div>
           <div class="funnel-num" style="color:var(--green);">7.7%</div>
         </div>
       </div>
+      <div style="margin-top:12px; font-size:9px; color:var(--text-muted); font-style:italic;">
+        Win rate = decided POVs only (Won 6 / Lost 72). Never Reached Trial excluded from analysis.
+      </div>
     </div>
   </div>
 
-  <!-- ROW 3: Engagement + Multi-tenant + Gbps -->
-  <div class="three-col">
+  <!-- ROW 3: Active vs Churned -->
+  <div class="two-col">
 
-    <!-- 30-Day Engagement -->
+    <!-- Active vs Churned with Revenue -->
     <div class="chart-card">
-      <div class="chart-title">30-Day Engagement</div>
-      <div class="chart-sub">Active customers · Apr 13 – May 12</div>
-      <div style="margin-top: 16px;">
-        <div class="engage-split">
-          <div style="margin-bottom:8px;">
-            <div style="font-size:10px; color:var(--text-muted); margin-bottom:10px; letter-spacing:0.06em;">Pendo activity in last 30 days</div>
-            <div style="display:flex; height:48px; border-radius:5px; overflow:hidden; margin-bottom:10px;">
-              <div style="width:54%; background:var(--green); opacity:0.6; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:#0d1117;">54%</div>
-              <div style="width:46%; background:var(--surface3); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--text-muted);">46%</div>
+      <div class="chart-title">Active vs. Churned — Revenue Distribution</div>
+      <div class="chart-sub">Dataset 1 · named customers (col B) · Won status only</div>
+      <div style="margin-top:16px; display:flex; gap:32px;">
+
+        <div style="flex:1;">
+          <div style="font-size:9px; color:var(--green); letter-spacing:0.1em; margin-bottom:10px;">ACTIVE (n=81)</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">&lt;50K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:48%; height:100%; background:var(--green); opacity:0.5; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--green); width:20px;">39</div>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:10px;">
-              <span style="color:var(--green);">Active · 44 customers</span>
-              <span style="color:var(--text-muted);">Dark · 38 customers</span>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">50–100K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:17%; height:100%; background:var(--green); opacity:0.65; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--green); width:20px;">14</div>
             </div>
-          </div>
-          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
-            <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:10px;">CHURN STATUS</div>
-            <div style="display:flex; gap:16px;">
-              <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--green); font-weight:500;">81</div>
-                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">active</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">100–500K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:22%; height:100%; background:var(--green); opacity:0.8; border-radius:3px;"></div>
               </div>
-              <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--yellow); font-weight:500;">2</div>
-                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">at risk</div>
+              <div style="font-size:9px; color:var(--green); width:20px;">18</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">500K+</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:9%; height:100%; background:var(--green); border-radius:3px;"></div>
               </div>
-              <div style="text-align:center; flex:1;">
-                <div style="font-size:28px; color:var(--orange); font-weight:500;">12</div>
-                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">churned</div>
-              </div>
+              <div style="font-size:9px; color:var(--green); width:20px;">7</div>
             </div>
           </div>
         </div>
+
+        <div style="flex:1;">
+          <div style="font-size:9px; color:var(--orange); letter-spacing:0.1em; margin-bottom:10px;">CHURNED (n=12)</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">&lt;50K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:50%; height:100%; background:var(--orange); opacity:0.5; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--orange); width:20px;">6</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">50–100K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:33%; height:100%; background:var(--orange); opacity:0.65; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--orange); width:20px;">4</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">100–500K</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:17%; height:100%; background:var(--orange); opacity:0.8; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--orange); width:20px;">2</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div style="font-size:9px; color:var(--text-muted); width:60px;">500K+</div>
+              <div style="flex:1; height:14px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+                <div style="width:0%; height:100%; background:var(--orange); border-radius:3px;"></div>
+              </div>
+              <div style="font-size:9px; color:var(--orange); width:20px;">0</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:9px; color:var(--text-muted); line-height:1.6;">
+            No 500K+ customers have churned.<br>
+            Churn concentrated in smaller accounts.
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- Multi-tenant / Customer Deployment Structure -->
+    <!-- Churn stats -->
     <div class="chart-card">
-      <div class="chart-title">Customer Deployment Structure</div>
-      <div class="chart-sub">Some customers run multiple separate environments · active accounts</div>
-      <div style="margin-top:16px; display:flex; flex-direction:column; gap:7px;">
-        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">CUSTOMERS WITH MULTIPLE ENVIRONMENTS</div>
-        <!-- bars for top multi-tenant customers -->
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 39</div>
-          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-            <div style="width:100%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+      <div class="chart-title">Churn Summary</div>
+      <div class="chart-sub">Dataset 1 · named customers · Won status</div>
+      <div style="margin-top:20px; display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; gap:16px;">
+          <div style="text-align:center; flex:1; padding:16px; background:var(--surface3); border-radius:6px;">
+            <div style="font-size:32px; color:var(--green); font-weight:500;">81</div>
+            <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">active</div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:30px;">20</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 25</div>
-          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          <div style="text-align:center; flex:1; padding:16px; background:var(--surface3); border-radius:6px;">
+            <div style="font-size:32px; color:var(--yellow); font-weight:500;">2</div>
+            <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">at-risk</div>
           </div>
-          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 49</div>
-          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
-          </div>
-          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 34</div>
-          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-            <div style="width:35%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
-          </div>
-          <div style="font-size:10px; color:var(--green); width:30px;">7</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Cust. 29</div>
-          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
-            <div style="width:25%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
-          </div>
-          <div style="font-size:10px; color:var(--green); width:30px;">5</div>
-        </div>
-        <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
-          <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">12</div>
-            <div style="font-size:9px; color:var(--text-muted);">multi-environment</div>
-          </div>
-          <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">68</div>
-            <div style="font-size:9px; color:var(--text-muted);">single environment</div>
-          </div>
-          <div style="text-align:center; flex:1;">
-            <div style="font-size:24px; color:var(--blue); font-weight:500;">1.7x</div>
-            <div style="font-size:9px; color:var(--text-muted);">avg per customer</div>
+          <div style="text-align:center; flex:1; padding:16px; background:var(--surface3); border-radius:6px;">
+            <div style="font-size:32px; color:var(--orange); font-weight:500;">12</div>
+            <div style="font-size:9px; color:var(--text-muted); margin-top:4px;">churned</div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Gbps Distribution -->
-    <div class="chart-card">
-      <div class="chart-title">Network Scale (Gbps)</div>
-      <div class="chart-sub">Active customers · where data available</div>
-      <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
-        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">DEPLOYMENT SIZE</div>
-        <div class="bar-row">
-          <div class="bar-label" style="width:70px; font-size:9px;">1 Gbps</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:56%; background:var(--blue); opacity:0.5;"></div>
-          </div>
-          <div class="bar-value">71</div>
+        <div style="padding:12px 16px; background:var(--surface3); border-radius:6px; border-left:3px solid var(--orange);">
+          <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">12.6% customer churn rate</div>
+          <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">All-time, across 95 ever-won customers. 2 outliers removed from churn engagement analysis.</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-label" style="width:70px; font-size:9px;">2–5 Gbps</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:22%; background:var(--blue); opacity:0.65;"></div>
-          </div>
-          <div class="bar-value">28</div>
+        <div style="padding:12px 16px; background:var(--surface3); border-radius:6px; border-left:3px solid var(--yellow);">
+          <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">26% of customers dark across all environments</div>
+          <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">21 of 82 active customers had zero Pendo activity across every tenant in the last 30 days. Early warning signal worth monitoring.</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-label" style="width:70px; font-size:9px;">6–15 Gbps</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:13%; background:var(--blue); opacity:0.8;"></div>
-          </div>
-          <div class="bar-value">17</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="width:70px; font-size:9px;">16–50 Gbps</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:7%; background:var(--blue); opacity:0.9;"></div>
-          </div>
-          <div class="bar-value">9</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="width:70px; font-size:9px;">50+ Gbps</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:2%; background:var(--blue);"></div>
-          </div>
-          <div class="bar-value">2</div>
-        </div>
-        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:9px; color:var(--text-muted); line-height:1.6;">
-          Median deployment: <span style="color:var(--blue);">1 Gbps</span><br>
-          Largest deployment: <span style="color:var(--blue);">150 Gbps</span><br>
-          60% of customers at minimum tier
-          <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px;">
-            <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em;">PATTERN — POV CONVERSION</div>
-            <div style="padding:8px 10px; background:var(--surface3); border-radius:4px; border-left:3px solid var(--green);">
-              <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:3px;">Won POVs trended larger.</div>
-              <div style="font-size:9.5px; color:var(--text-muted); line-height:1.5;">Median Gbps — Won: 6 · Lost: 2. May indicate larger organizations convert at a higher rate. Directional only — n=6 won POVs.</div>
-            </div>
-            <div style="padding:8px 10px; background:var(--surface3); border-radius:4px; border-left:3px solid var(--text-muted);">
-              <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:3px;">No clear Gbps pattern for churn.</div>
-              <div style="font-size:9.5px; color:var(--text-muted); line-height:1.5;">Churn occurs across all deployment sizes. No size threshold predicts retention. Largest deployments (50+ Gbps) are all active — but too few to generalize.</div>
-            </div>
-          </div>
+        <div style="padding:12px 16px; background:var(--surface3); border-radius:6px; border-left:3px solid var(--green);">
+          <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:4px;">No 500K+ customer has churned.</div>
+          <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Largest accounts all retained. Churn concentrated in sub-100K segment.</div>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- POV ENGAGEMENT ANALYSIS -->
-  <div class="section-label" style="margin-top:8px;">Dataset 1: Customer Engagement vs. Churn</div>
+<div class="section-label" style="margin-top:8px;">Does product engagement predict churn?</div>
   <div class="chart-card" style="margin-bottom:20px;">
     <div class="chart-title">Does product engagement predict whether a customer churns?</div>
     <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data · Active customers (n=127, 1 outlier excluded) vs Churned (n=10, 2 outliers excluded) · <span style="color:var(--yellow);">⚑ Churned pool is small — treat as directional</span></div>
@@ -1028,9 +943,9 @@
     </div>
   </div>
 
-  <div class="section-label" style="margin-top:8px;">Dataset 2: POV Engagement vs. Conversion</div>
+  <div class="section-label" style="margin-top:8px;">Does POV engagement predict whether we win?</div>
   <div class="chart-card" style="margin-bottom:32px;">
-    <div class="chart-title">Does trial engagement predict whether we win the deal?</div>
+    <div class="chart-title">Does POV engagement predict whether we win?</div>
     <div class="chart-sub" style="margin-bottom:20px;">All-time Pendo data (= trial activity) · POV Won (n=6) vs POV Lost (n=72) · <span style="color:var(--yellow);">⚑ Low sample size on Won — interpret with caution</span></div>
 
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:32px;">
@@ -1135,8 +1050,8 @@
           </div>
 
           <div style="padding:12px; background:var(--surface3); border-radius:5px; border-left:3px solid var(--blue);">
-            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">For customers: more engagement = less churn. Low 30-day activity in active accounts (44%) is worth watching as an early churn signal.</div>
-            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Reasons live in Salesforce opportunity notes and Zoom debrief transcripts. That's the data gap this architecture addresses.</div>
+            <div style="font-size:10px; color:var(--text-mid); margin-bottom:4px; font-weight:500;">Higher activity = less likely to churn — consistent across all four dimensions.</div>
+            <div style="font-size:10px; color:var(--text-muted); line-height:1.6;">Active customers lead churned across events, minutes, active days, and unique visitors. Both outliers removed. The more embedded in the product, the harder it is to leave.</div>
           </div>
 
           <div style="font-size:9px; color:var(--text-muted); font-style:italic; line-height:1.6; margin-top:4px;">
@@ -1149,6 +1064,169 @@
   </div>
 
   <!-- ASSUMPTIONS -->
+  <!-- ROW 3: Engagement + Multi-tenant + Gbps -->
+  <div class="three-col">
+
+    <!-- 30-Day Engagement -->
+    <div class="chart-card">
+      <div class="chart-title">30-Day Engagement</div>
+      <div class="chart-sub">Active customers · Apr 13 – May 12</div>
+      <div style="margin-top: 16px;">
+        <div class="engage-split">
+          <div style="margin-bottom:8px;">
+            <div style="font-size:10px; color:var(--text-muted); margin-bottom:10px; letter-spacing:0.06em;">Pendo activity in last 30 days</div>
+            <div style="display:flex; height:48px; border-radius:5px; overflow:hidden; margin-bottom:10px;">
+              <div style="width:54%; background:var(--green); opacity:0.6; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:#0d1117;">74%</div>
+              <div style="width:46%; background:var(--surface3); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--text-muted);">26%</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px;">
+              <span style="color:var(--green);">Active · 61 customers</span>
+              <span style="color:var(--text-muted);">Dark · 21 customers</span>
+            </div>
+          </div>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:10px;">CHURN STATUS</div>
+            <div style="display:flex; gap:16px;">
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--green); font-weight:500;">81</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">active</div>
+              </div>
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--yellow); font-weight:500;">2</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">at risk</div>
+              </div>
+              <div style="text-align:center; flex:1;">
+                <div style="font-size:28px; color:var(--orange); font-weight:500;">12</div>
+                <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.06em;">churned</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-tenant / Customer Deployment Structure -->
+    <div class="chart-card">
+      <div class="chart-title">Customer Deployment Structure</div>
+      <div class="chart-sub">Some customers run multiple separate environments · active accounts</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:7px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">CUSTOMERS WITH MULTIPLE ENVIRONMENTS</div>
+        <!-- bars for top multi-tenant customers -->
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Account 39</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:100%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:30px;">20</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Account 25</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Account 49</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:50%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:30px;">10</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Account 34</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:35%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:30px;">7</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="font-size:9px; color:var(--text-muted); width:70px; text-align:right;">Account 29</div>
+          <div style="flex:1; height:16px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+            <div style="width:25%; height:100%; background:var(--green); opacity:0.6; border-radius:3px;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--green); width:30px;">5</div>
+        </div>
+        <div style="margin-top:10px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:20px;">
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">12</div>
+            <div style="font-size:9px; color:var(--text-muted);">multi-environment</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">68</div>
+            <div style="font-size:9px; color:var(--text-muted);">single environment</div>
+          </div>
+          <div style="text-align:center; flex:1;">
+            <div style="font-size:24px; color:var(--blue); font-weight:500;">1.7x</div>
+            <div style="font-size:9px; color:var(--text-muted);">avg per customer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gbps Distribution -->
+    <div class="chart-card">
+      <div class="chart-title">Network Scale (Gbps)</div>
+      <div class="chart-sub">Active customers · where data available</div>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:4px;">DEPLOYMENT SIZE</div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">1 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:56%; background:var(--blue); opacity:0.5;"></div>
+          </div>
+          <div class="bar-value">71</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">2–5 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:22%; background:var(--blue); opacity:0.65;"></div>
+          </div>
+          <div class="bar-value">28</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">6–15 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:13%; background:var(--blue); opacity:0.8;"></div>
+          </div>
+          <div class="bar-value">17</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">16–50 Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:7%; background:var(--blue); opacity:0.9;"></div>
+          </div>
+          <div class="bar-value">9</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:70px; font-size:9px;">50+ Gbps</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:2%; background:var(--blue);"></div>
+          </div>
+          <div class="bar-value">2</div>
+        </div>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border); font-size:9px; color:var(--text-muted); line-height:1.6;">
+          Median deployment: <span style="color:var(--blue);">1 Gbps</span><br>
+          Largest deployment: <span style="color:var(--blue);">150 Gbps</span><br>
+          60% of customers at minimum tier
+          <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px;">
+            <div style="font-size:9px; color:var(--text-muted); letter-spacing:0.1em;">PATTERN — POV CONVERSION</div>
+            <div style="padding:8px 10px; background:var(--surface3); border-radius:4px; border-left:3px solid var(--green);">
+              <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:3px;">Won POVs trended larger.</div>
+              <div style="font-size:9.5px; color:var(--text-muted); line-height:1.5;">Median Gbps — Won: 6 · Lost: 2. May indicate larger organizations convert at a higher rate. Directional only — n=6 won POVs.</div>
+            </div>
+            <div style="padding:8px 10px; background:var(--surface3); border-radius:4px; border-left:3px solid var(--text-muted);">
+              <div style="font-size:10px; color:var(--text-mid); font-weight:500; margin-bottom:3px;">No clear Gbps pattern for churn.</div>
+              <div style="font-size:9.5px; color:var(--text-muted); line-height:1.5;">Churn occurs across all deployment sizes. No size threshold predicts retention. Largest deployments (50+ Gbps) are all active — but too few to generalize.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- POV ENGAGEMENT ANALYSIS -->
   <div class="assumptions-section">
     <div class="assumptions-toggle" onclick="toggleAssumptions()">
       <div class="assumptions-toggle-label">Data Assumptions &amp; Taxonomy Notes</div>
@@ -1175,6 +1253,11 @@
         <div class="assumption-raw">Blank rows in Col B</div>
         <div class="assumption-treat">Each blank treated as a unique, independent prospect. If two blanks represent the same company evaluated twice, pipeline counts may be overstated. This is the biggest assumption in the dataset.</div>
         <div class="assumption-flag" style="color:var(--orange);">Key assumption</div>
+      </div>
+      <div class="assumption-row">
+        <div class="assumption-raw">Never POC-ed rows</div>
+        <div class="assumption-treat">Excluded from all analysis — win rate, engagement, and conclusions. These accounts never reached a formal trial. Shown in pipeline chart as "Never Reached Trial" for completeness only.</div>
+        <div class="assumption-flag" style="color:var(--yellow);">Excluded</div>
       </div>
       <div class="assumption-row">
         <div class="assumption-raw">POV = POC</div>
