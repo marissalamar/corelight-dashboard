@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Win-Loss Intelligence Architecture — Corelight</title>
+<title>Customer Intelligence Architecture — Corelight</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -139,8 +139,8 @@
 
 <div class="header">
   <div>
-    <div class="header-title">Win-Loss Intelligence — System Architecture</div>
-    <div class="header-sub">Corelight · Product Operations · Marissa LaMar</div>
+    <div class="header-title">Customer Intelligence — System Architecture</div>
+    <div class="header-sub">Win-Loss · Voice of Customer · Product Operations · Marissa LaMar</div>
   </div>
   <div class="header-meta">
     <span class="badge">v1 · May 2026</span>
@@ -152,6 +152,9 @@
 <div class="annotation-layer" id="annotation-layer" onclick="placeAnnotation(event)"></div>
 
 <div class="canvas">
+  <div style="max-width:1100px; margin:0 auto 16px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--blue); letter-spacing:0.1em; text-transform:uppercase; border-left:3px solid var(--blue); padding-left:12px;">
+    01 · Win-Loss Intelligence
+  </div>
   <div class="diagram">
 
     <!-- LAYER 1 -->
@@ -222,7 +225,7 @@
       <div class="node deliverable-node">
         <div class="node-title">Shared Claude Project</div>
         <div class="node-desc">Me + product team. Conversational — ask questions, get sourced answers. Vettable and improvable over time.</div>
-        <div class="query-line"><span class="query-arrow">→</span> "What did we lose to competitors in Q1?"</div>
+        <div class="query-line"><span class="query-arrow">→</span> "What did we lose to CrowdStrike in Q1?"</div>
         <div class="query-line"><span class="query-arrow">→</span> "Which feature gaps appear most in lost deals?"</div>
         <div class="query-line"><span class="query-arrow">→</span> "Show me the evidence for that."</div>
       </div>
@@ -241,69 +244,139 @@
   </div>
 
   <div class="footer">The last step is not automated. That's the point. — PMs evaluate, validate, and act on signal. Human judgment drives the decision.</div>
-</div>
 
-<script>
-  let annotating = false;
+  <!-- DIVIDER -->
+  <div style="max-width:1100px; margin:40px auto 24px; border-top:2px solid var(--border);"></div>
 
-  function toggleAnnotate() {
-    annotating = !annotating;
-    const layer = document.getElementById('annotation-layer');
-    const btn = document.getElementById('annotate-btn');
-    layer.classList.toggle('active', annotating);
-    btn.classList.toggle('active', annotating);
-    btn.textContent = annotating ? '✏ Click anywhere to place' : '✏ Add Note';
-  }
+  <!-- VOC SECTION LABEL -->
+  <div style="max-width:1100px; margin:0 auto 16px; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--green); letter-spacing:0.1em; text-transform:uppercase; border-left:3px solid var(--green); padding-left:12px;">
+    02 &middot; Voice of Customer Intelligence &mdash; Scaled Architecture
+  </div>
+  <div style="max-width:1100px; margin:0 auto 20px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-muted); font-style:italic;">
+    Directional. Built on the same synthesis layer as the win-loss demo &mdash; extended to more sources and more automation.
+  </div>
 
-  function placeAnnotation(e) {
-    if (!annotating) return;
-    const note = document.createElement('div');
-    note.className = 'annotation';
-    note.style.left = (e.clientX - 70) + 'px';
-    note.style.top = (e.clientY - 65) + 'px';
+  <!-- VOC 5-LAYER DIAGRAM -->
+  <div style="max-width:1300px; margin:0 auto; display:grid; grid-template-columns:220px 56px 240px 56px 140px 56px 120px 56px 240px; align-items:center; gap:0;">
 
-    const pin = document.createElement('div');
-    pin.className = 'annotation-pin';
-    pin.textContent = '✎ note';
+    <!-- LAYER 1: DATA SOURCES -->
+    <div style="display:flex; flex-direction:column; gap:0;">
+      <div class="layer-header sources" style="font-size:9px;">Layer 1 &middot; Data Sources</div>
+      <div class="node source" style="margin-bottom:6px;">
+        <div class="node-title" style="font-size:11px;">CS Notes</div>
+        <div class="node-desc">Customer success calls, QBR summaries</div>
+        <span class="node-tag tag-manual">manual upload</span>
+      </div>
+      <div class="node source" style="margin-bottom:6px;">
+        <div class="node-title" style="font-size:11px;">PS Notes</div>
+        <div class="node-desc">Implementation friction, onboarding blockers</div>
+        <span class="node-tag tag-manual">manual upload</span>
+      </div>
+      <div class="node source" style="margin-bottom:6px;">
+        <div class="node-title" style="font-size:11px;">PM Call Notes</div>
+        <div class="node-desc">Research &amp; roadmap calls</div>
+        <span class="node-tag tag-manual">manual upload</span>
+      </div>
+      <div class="node source" style="margin-bottom:6px;">
+        <div class="node-title" style="font-size:11px;">Support Case History</div>
+        <div class="node-desc">Recurring issues, friction patterns</div>
+        <span class="node-tag tag-auto">automated</span>
+        <span class="node-tag tag-api">API</span>
+      </div>
+      <div class="node source">
+        <div class="node-title" style="font-size:11px;">UX Research</div>
+        <div class="node-desc">User interviews, usability studies</div>
+        <span class="node-tag tag-manual">manual upload</span>
+      </div>
+    </div>
 
-    const textarea = document.createElement('textarea');
-    textarea.className = 'annotation-text';
-    textarea.placeholder = 'Type your note...';
-    textarea.rows = 2;
+    <!-- ARROW 1 -->
+    <div style="display:flex; flex-direction:column; align-items:center; padding:0 2px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); text-align:center; margin-bottom:4px;">ingested</div>
+      <svg width="56" height="36" viewBox="0 0 56 36">
+        <defs><marker id="v1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8C959F"/></marker></defs>
+        <line x1="4" y1="18" x2="46" y2="18" stroke="#8C959F" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#v1)"/>
+      </svg>
+    </div>
 
-    const del = document.createElement('button');
-    del.className = 'annotation-delete';
-    del.textContent = '×';
-    del.onclick = () => note.remove();
+    <!-- LAYER 2: SYNTHESIS -->
+    <div style="display:flex; flex-direction:column;">
+      <div class="layer-header synthesis" style="font-size:9px;">Layer 2 &middot; Synthesis</div>
+      <div class="node synthesis-node">
+        <div class="node-title" style="color:var(--green); font-size:12px; margin-bottom:10px;">Python + claude-sonnet</div>
+        <div class="synth-step"><div class="synth-num">01</div><div class="synth-text" style="font-size:10px;">Tag by product &amp; feature area</div></div>
+        <div class="synth-step"><div class="synth-num">02</div><div class="synth-text" style="font-size:10px;">Find patterns within &amp; across areas</div></div>
+        <div class="synth-step"><div class="synth-num">03</div><div class="synth-text" style="font-size:10px;">Attach ARR from Salesforce</div></div>
+        <div class="synth-step"><div class="synth-num">04</div><div class="synth-text" style="font-size:10px;">Surface themes with evidence &amp; source links</div></div>
+      </div>
+    </div>
 
-    let dragging = false, ox, oy;
-    pin.style.cursor = 'grab';
-    pin.addEventListener('mousedown', ev => {
-      dragging = true;
-      ox = ev.clientX - note.offsetLeft;
-      oy = ev.clientY - note.offsetTop;
-      ev.preventDefault();
-    });
-    document.addEventListener('mousemove', ev => {
-      if (dragging) { note.style.left = (ev.clientX - ox) + 'px'; note.style.top = (ev.clientY - oy) + 'px'; }
-    });
-    document.addEventListener('mouseup', () => dragging = false);
+    <!-- ARROW 2 -->
+    <div style="display:flex; flex-direction:column; align-items:center; padding:0 2px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); text-align:center; margin-bottom:4px;">build &amp; test</div>
+      <svg width="56" height="36" viewBox="0 0 56 36">
+        <defs><marker id="v2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#57606A"/></marker></defs>
+        <line x1="4" y1="18" x2="46" y2="18" stroke="#57606A" stroke-width="1.5" marker-end="url(#v2)"/>
+      </svg>
+    </div>
 
-    note.appendChild(pin);
-    note.appendChild(textarea);
-    note.appendChild(del);
-    document.getElementById('annotation-layer').appendChild(note);
-    textarea.focus();
+    <!-- LAYER 3: PROTOTYPE -->
+    <div style="display:flex; flex-direction:column;">
+      <div class="layer-header" style="font-size:9px; background:var(--purple-bg); color:var(--purple); border-color:var(--purple-border);">Layer 3 &middot; Prototype</div>
+      <div class="node" style="border-color:var(--purple-border); padding:14px;">
+        <div class="node-title" style="font-size:11px;">Replit</div>
+        <div class="node-desc">Rapid build &amp; test. Working app in hours, not weeks.</div>
+        <div style="margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--purple);">or Cursor internally</div>
+      </div>
+    </div>
 
-    annotating = false;
-    document.getElementById('annotation-layer').classList.remove('active');
-    document.getElementById('annotate-btn').classList.remove('active');
-    document.getElementById('annotate-btn').textContent = '✏ Add Note';
-  }
+    <!-- ARROW 3 -->
+    <div style="display:flex; flex-direction:column; align-items:center; padding:0 2px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); text-align:center; margin-bottom:4px;">deploy</div>
+      <svg width="56" height="36" viewBox="0 0 56 36">
+        <defs><marker id="v3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#57606A"/></marker></defs>
+        <line x1="4" y1="18" x2="46" y2="18" stroke="#57606A" stroke-width="1.5" marker-end="url(#v3)"/>
+      </svg>
+    </div>
 
-  function clearAnnotations() {
-    document.getElementById('annotation-layer').querySelectorAll('.annotation').forEach(n => n.remove());
-  }
+    <!-- LAYER 4: DEPLOYMENT -->
+    <div style="display:flex; flex-direction:column;">
+      <div class="layer-header" style="font-size:9px; background:var(--orange-bg); color:var(--orange); border-color:var(--orange-border);">Layer 4 &middot; Deploy</div>
+      <div class="node" style="border-color:var(--orange-border); padding:14px;">
+        <div class="node-title" style="font-size:11px;">GitHub</div>
+        <div class="node-desc">Internal GitHub instance. Behind your firewall.</div>
+        <div style="margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--orange);">GitHub Pages for demo</div>
+      </div>
+    </div>
+
+    <!-- ARROW 4 -->
+    <div style="display:flex; flex-direction:column; align-items:center; padding:0 2px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-muted); text-align:center; margin-bottom:4px;">to PMs</div>
+      <svg width="56" height="36" viewBox="0 0 56 36">
+        <defs><marker id="v4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#57606A"/></marker></defs>
+        <line x1="4" y1="18" x2="46" y2="18" stroke="#57606A" stroke-width="1.5" marker-end="url(#v4)"/>
+      </svg>
+    </div>
+
+    <!-- LAYER 5: DELIVERABLE -->
+    <div style="display:flex; flex-direction:column;">
+      <div class="layer-header deliverable" style="font-size:9px;">Layer 5 &middot; Deliverable</div>
+      <div class="node deliverable-node" style="margin-bottom:6px;">
+        <div class="node-title" style="font-size:11px;">Shared Claude Project</div>
+        <div class="node-desc">Me + PMs. Ask questions, get sourced answers.</div>
+        <div class="query-line" style="font-size:9px;"><span class="query-arrow">&#8594;</span> &quot;What are customers asking for most?&quot;</div>
+        <div class="query-line" style="font-size:9px;"><span class="query-arrow">&#8594;</span> &quot;What keeps coming up in PS notes?&quot;</div>
+      </div>
+      <div class="node deliverable-node">
+        <div class="node-title" style="font-size:11px;">Bi-Weekly Report</div>
+        <div class="node-desc">Themes &amp; signals. Delivered. Zero behavior change required.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer" style="max-width:1300px; margin:16px auto; padding-bottom:48px;">The goal is the same: meet customers where they already speak. No lift required from their end. &mdash; This is what walk looks like. The demo shows crawl.</div>
+
 </script>
 </body>
 </html>
